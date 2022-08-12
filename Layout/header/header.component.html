@@ -1,0 +1,213 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <div class="container ">
+    <div class="sidebar">
+      <a class="side-menu" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+        aria-controls="offcanvasExample">
+        <i class="fas fa-bars" style="color: #66bf8a; font-size: 20px;"></i>
+      </a>
+    </div>
+    <div class="navbar-brand pl-lg-4 ms-3 mx-auto">
+      <a [routerLink]="['/userdashboard']"> <img src="../../../assets/Images/spyhre-logoemail.png"
+          style="height: 58px;" /></a>
+    </div>
+    <div class="imageProfileHide">
+      <div class="d-flex">
+        <div class="d-flex align-items-end ms-auto mx-5" *ngFor="let user of usersData">
+          <img class="mCS_img_loaded" alt="" src="{{image}}/{{user.U_PROFILE_IMAGE}}"
+            onerror="this.src='../../../assets/Images/profile-img.png'" (click)="ClickProfile(user)" class="profimg">
+          <div style="padding-left: 10px;">
+            <h6 class="mb-0 pb-1" style="color: #fff; font-size: 16px; cursor: pointer;" (click)="ClickProfile(user)">
+              {{user.U_NAME}}</h6>
+            <span><select id="ddlulogstatus" tabindex="1" class="form-controlheader">
+                <option value="1">Online</option>
+                <option value="2">Busy</option>
+                <option value="3">In meeting</option>
+                <option value="4">Away</option>
+                <option value="5">Offline</option>
+              </select></span>
+            <span style="padding-left: 10px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#myModal1234"><img
+                src="../../../assets/Images/id-card.png"></span>
+            <a style="padding-left: 15px;"><i class="fa fa-envelope"
+                style="position: relative;top: 3px; font-size:17px; color: #18a4cc;"></i></a>
+          </div>
+        </div>
+        <div class="ms-auto">
+          <a class="logout mb-4 " (click)="LogOut()">
+            <h4><i class="fas fa-power-off " style="color: #982020; cursor: pointer;"></i></h4>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="close-menu">
+    <div class="col-md-12 ">
+      <div class="row" *ngFor="let user of usersData">
+        <div class="col-md-4">
+          <a href="userprofile">
+            <img class="img-profile mCS_img_loaded" alt="" src="{{image}}/{{user.U_PROFILE_IMAGE}}"
+              onerror="this.src='../../../assets/Images/profile-img.png'"></a>
+        </div>
+        <div class="col-md-8 col-name">
+          <div class="user-user">
+            <a href="userprofile" style="text-decoration: none;">
+              <div style=" color:white;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 150px;">{{user.U_NAME}}</div>
+            </a>
+            <div style="width: 75%; position:relative; text-align: justify; ">
+              <span style="text-align: justify;" data-bs-toggle="modal" data-bs-target="#myModal1234"><img
+                  src="../../../assets/Images/id-card.png"></span>
+
+
+              <span class="notification" style="padding-left: 10px;">
+                <a href="notifications" class="popup" title="No Notifications" id="datanotifcations1" style="background:none;">
+                  <i class="fa fa-envelope " style="/*color: #eee;*/position: relative; top: 2px; font-size:16px;"
+                    aria-hidden="true"></i>
+                </a>
+              </span>
+
+              <span class="lgrobtn" (click)="LogOut()" style="font-size:11px; float: right; padding-top: 5px;">
+                <a href="#">
+                  <i class="fa fa-power-off fa-2x" aria-hidden="true" style="color:#982020;">
+                  </i>
+                </a>
+              </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="date-time">
+      <p style="font-size: smaller;">{{dateToday | date: 'EEE MMM d, h:mm:ss a'}}</p>
+
+    </div>
+  </div>
+  <div class="offcanvas-body">
+
+
+    <table id="dtHorizontalExample" style="width:-webkit-fill-available;">
+
+      <tbody id="demo1" *ngFor="let item of modules">
+        <ng-container>
+          <tr>
+            <td *ngIf="item.SMOD_M_ID == 0 && item.status != 'N'">
+              <div class="nav-link collapsed" (click)="SubModOpen(item.MOD_ID, item)" style="color: antiquewhite;"
+                [ngClass]="{'incative' :Isinactive,'highlight' : item.MOD_ID == selectedName,'highlighttr':item.type==selecttr}">
+                {{item.MOD_NAME}}<i class="fa fa-caret-down" aria-hidden="true"
+                  style="float: right;padding-top: 5px;font-weight: 600 !important;"></i>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="24" style="display: none; color: gray;" id='td-{{item.MOD_ID}}'>
+              <div *ngFor="let subitem of modules">
+                <div *ngIf="subitem.SMOD_M_ID == item.MOD_ID && item.MOD_ID != 0 && subitem.status != 'N'">
+                  <a class="nav-link py-1 pt-1 " href="/{{subitem.SMOD_PAGE_NAME}}">
+                    <li>{{subitem.SMOD_NAME}}</li>
+                  </a>
+                </div>
+              </div>
+
+            </td>
+          </tr>
+
+        </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ------Id Card Modal-------- -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" style="text-align: -webkit-center;">
+  <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 280px !important;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pop-header table">
+          <div class="tabel-cell">
+            <img src="assets\Images\Logo_spyhre.png" alt="Spyhre" width="200" class="logospy" height="60px">
+          </div>
+        </div>
+        <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </a>
+      </div>
+      <div class="modal-body" style="position: relative;flex: 1 1 auto; padding: 0rem;">
+        <span class="vcardname">{{popupdata_Uname}}</span>
+        <span class="vcarddesig">{{popupdata_designation}}</span>
+        <div>
+          <div class="vempid">Employee ID: {{popupdata_U_EMP_CODE}}</div>
+          <div class="vprofileimg"> <img style="height: 100px;"
+              src="https://sepapi.azaz.com/api/resources/images/{{popupdata_U_PROFILE_IMAGE}}"
+              onerror="this.src='assets/Images/profile-img.png'"></div>
+          <div class="vsign"><img src="assets/Images/sign.png"><br>Authorized Signature</div>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding: 0px !important;">
+        <div class="vlocation">
+          <span class="vplace">{{popupdata_Location}}</span>
+          <div class="row">
+
+            <div class="col-xs-3"><label>DOJ:</label>{{popupdata_U_DOB |date: 'M/yyyy'}}</div>
+            <div class="col-xs-9"><label for="">Address: </label>
+              46-22-15, Sivatowers, 3rd Fl., Danavaipeta</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="myModal1234" tabindex="-1" role="dialog" aria-hidden="true"
+  style="text-align: -webkit-center;">
+  <div class="modal-dialog modal-dialog-centered modal-lg" style="width: 280px !important;">
+    <div class="modal-content" *ngFor="let val of usersData">
+      <div class="modal-header">
+        <div class="pop-header table">
+          <div class="tabel-cell">
+            <img src="assets\Images\Logo_spyhre.png" alt="Spyhre" width="200" class="logospy" height="60px">
+          </div>
+        </div>
+        <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </a>
+      </div>
+      <div class="modal-body" style="position: relative;flex: 1 1 auto; padding: 0rem;">
+        <span class="vcardname">{{val.U_NAME}}</span>
+        <span class="vcarddesig">{{val.U_DESIGNATION_NAME}}</span>
+        <div>
+          <div class="vempid">Employee ID: {{val.U_EMP_CODE}}</div>
+          <div class="vprofileimg"> <img style="height: 100px;"
+              src="https://sepapi.azaz.com/api/resources/images/{{val.U_PROFILE_IMAGE}}"
+              onerror="this.src='assets/Images/profile-img.png'"></div>
+          <div class="vsign"><img src="assets/Images/sign.png"><br>Authorized Signature</div>
+        </div>
+      </div>
+      <div class="modal-footer" style="padding: 0px !important;">
+        <div class="vlocation">
+          <span class="vplace">{{val.U_LOC_NAME}}</span>
+          <div class="row">
+            <div class="col-xs-3">
+              <label for="">DOJ: </label>
+              &nbsp;&nbsp;{{val.U_DOJ |date: 'MM/yyyy'}}
+            </div>
+            <div class="col-xs-9">
+              <label for="">Address: </label>
+              46-22-15, Sivatowers, 3rd Fl., Danavaipeta
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

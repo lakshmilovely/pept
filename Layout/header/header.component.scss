@@ -1,0 +1,276 @@
+.logout {
+  height: 25px;
+}
+.offcanvas-start {
+  width: 250px !important;
+  border-right: none;
+}
+
+//  .align-items-end{
+//    padding-right: 50px;
+//  }
+.bg-dark{
+  background-color: rgba(0,0,0,0.8) !important;
+}
+
+select.form-controlheader {
+  background-color: #0a0a0a;
+  box-shadow: inset 0 0px 0px rgb(0 0 0 / 8%);
+  color: #fff;
+  outline: none;
+  border: none;
+}
+
+
+
+.fa-power-off {
+color: #982020;
+cursor: pointer;
+font-size: 20px;
+ padding-left: 20px;
+vertical-align: middle;
+
+}
+p {
+margin-top: 0;
+margin-bottom: 0rem;
+}
+
+
+
+
+.col-name{
+padding-left: 0px !important;
+}
+.close-menu {
+cursor: pointer;
+text-align: right;
+padding: 20px 10px 5px 5px;
+// padding: 20px;
+color: #fff;
+background: #1a2229;
+}
+.date-time{
+padding-top: 10px; 
+padding-bottom: 0px; 
+text-align: center;
+}
+.offcanvas-body{
+background: #2d353c;
+}
+
+.profimg {
+border-radius: 50%; width: 50px; height: 50px; cursor: pointer; object-fit: cover; border: 1px solid white;
+}
+
+.img-profile {
+border-radius: 50%; width: 50px; height: 50px; object-fit: cover;
+}
+
+.btn {
+color: whitesmoke !important;
+width: 100%;
+text-align: left;
+display: flex;
+outline: none;
+}
+
+.btn:focus,.btn:active {
+outline: none !important;
+box-shadow: none;
+}
+
+li button[aria-expanded="true"] i{
+// color: black;
+transform: rotate(90deg);
+transition: all .5s linear;
+
+}
+.nav-link:hover{
+
+color: #fff;
+
+background-color: #18a4cc; 
+
+}
+
+.nav-link:focus{
+
+color: #fff;
+
+background-color: #18a4cc; 
+
+}
+
+.nav-link{
+font-size: 16px;
+color: #fff;
+padding-left: 30px;
+cursor: pointer;
+}
+
+.offcanvas-body{
+
+padding: 0px !important;
+
+}
+
+.py-1{
+
+background-color: #1a2229;
+
+color: #889097 !important;
+
+font-size: 14px;
+
+}
+
+.py-1:hover{
+
+color: #fff !important;
+
+background-color: #1a2229;
+
+}
+// .btn-toggle::after {
+//   width: 1.25em;
+//   line-height: 0;
+//   font-family: "Font Awesome 5 Free";
+//   font-weight: 900;
+//   content: "\f054";
+//   transition: transform .35s ease;
+//   transform-origin: 0.5em 10%;
+// }
+
+.vcardname {
+width: 100%;
+font-weight: 300;
+float: left;
+background: #0C395F;
+color: #fff;
+font-size: 18px;
+text-transform: uppercase;
+text-align: center;
+padding: 12px 0;
+}
+.vcarddesig {
+float: left;
+width: 100%;
+text-align: center;
+background: #99C1DA;
+color: #02223e;
+text-shadow: 0px 0px, 0px 0px, 0px 0px;
+letter-spacing: 2px;
+font-weight: bold;
+font-size: 16px;
+text-transform: uppercase;
+text-align: center;
+padding: 9px 0;
+}
+.vempid {
+float: left;
+width: 100%;
+color: #0C395F;
+background: #fff;
+text-shadow: 0px 0px, 0px 0px, 0px 0px;
+font-size: 16px;
+text-align: center;
+}
+.vprofileimg, .vsign {
+// float: left;
+width: 100%;
+color: #0C395F;
+background: #fff;
+font-size: small;
+text-align: center;
+text-transform: uppercase;
+font-size: 9px;
+text-shadow: 0px 0px, 0px 0px, 0px 0px;
+}
+.vlocation {
+float: left;
+width: 100%;
+color: #fff;
+background: #0C395F;
+padding: 5px 0;
+font-size: small;
+text-align: center;
+}
+
+.vplace {
+text-transform: uppercase;
+font-size: 16px;
+width: 100%;
+float: left;
+margin-bottom: 15px;
+}
+.col-xs-3 {
+width: 25%;
+margin-bottom: -18px;
+}
+.col-xs-9 {
+width: 70%;
+text-align: end;
+font-size: small;
+}
+.logospy{
+display: block;
+max-width: 100%;
+height: auto;
+// margin-left: 25px;
+}
+.vlocation div:nth-child(3) {
+float: right;
+padding-right: 10px;
+text-align: right;
+}
+.vprofileimg img {
+border-radius: 50%;
+border: 3px solid #0C395F;
+width: 130px;
+height: 130px !important;
+object-fit: cover;
+}
+
+.btn-close {
+position: absolute;
+  right: -7px;
+  top: -9px;
+}
+
+.modal-content {
+width: auto !important;
+}
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px !important;
+  padding-top: 1rem !important;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+}
+
+@media only screen and (min-width : 280px) and (max-width : 720px) {
+  .imageProfileHide{
+    display: none;
+  }
+ 
+  .col-md-4 {
+    width: 33.33333333%;
+  }
+.col-md-8 {
+  width: 66.66666667%;
+ }
+}
+
+
+
+::-webkit-scrollbar {
+  width: 0px !important;
+  height: 0px !important;
+}
+
+

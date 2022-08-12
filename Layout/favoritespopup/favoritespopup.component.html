@@ -1,0 +1,85 @@
+<div class="modal-dialog modal-dialog-centered modal-lg modal-xl">
+    <div class="modal-content py-4">
+        <div class="modal-header"
+            style="background: linear-gradient(to right, rgb(0, 41, 88) 0%, rgba(255,175,75,0) 100%) !important;height: 65px;">
+            <div class="modal-content modal-popup" (click)="cancel()" style="cursor: pointer;">
+                <a class="close-link" style="text-decoration: auto !important;">x</a>
+            </div>
+            <div class="pop-header table">
+                <div class="table-cell">
+                    <img src="assets\Images\spyhre-logoemail.png" class="img-responsive" alt="PLLC">
+                </div>
+            </div>
+            <div class="pop-content row " id="imagediv" style="height: 525px; display: none;">
+                <div style="text-align: center;">
+                    <img id="Contentadmin_Uc_Events_imgloading" src="Images/loading_black.gif"
+                        style="padding:10px 20px; margin-top:200px;">
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <h5 style="text-align:center; color:skyblue">User Favourite</h5>
+            <form [formGroup]="favouriteaddForm">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="Title">Title</label> <br>
+                            <input type="text" id="Title" style="width :100%" placeholder="Title"
+                                formControlName="Title" [ngClass]="{'is-invalid':submitted && f.Title.errors}">
+
+                            <div *ngIf="submitted && f.Title.errors" class="invalid-feedback">
+                                <div class="text-danger" *ngIf="f.Title.errors.required">Title is required*</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="Pageurl">Page URL</label><br>
+                            <input type="text" id="Pageurl" style="width :100%" placeholder="Page URL"
+                                formControlName="PageURL" [ngClass]="{'is-invalid':submitted && f.PageURL.errors}">
+                            <div *ngIf="submitted && f.PageURL.errors" class="invalid-feedback">
+                                <div class="text-danger" *ngIf="f.PageURL.errors.required"> Page URL is required*</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="Sequence">Sequence</label><br>
+                            <input type="text" id="Sequence" style="width :100%" placeholder="Sequence"
+                                formControlName="Sequence" [ngClass]="{'is-invalid':submitted && f.Sequence.errors}">
+                            <div *ngIf="submitted && f.Sequence.errors" class="invalid-feedback">
+                                <div class="text-danger" *ngIf="f.Sequence.errors.required"> Sequence is required*</div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <br>
+                <div class="form-check" *ngIf="checkbox1">
+                    <input type="checkbox" value="" id="defaultCheck1">
+                    <label for="defaultCheck1">
+                        Show In Favourite
+                    </label>
+                </div>
+                <div class="form-check" *ngIf="checkbox">
+                    <label style="margin: 1px;float: left;font-size: 20px;" for="FAV_ACTIVE">
+
+                        <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"
+                            (change)="status($event.target.checked)" name="FAV_ACTIVE"
+                            formControlName="FAV_ACTIVE">&nbsp;
+
+                        <label *ngIf="isactive" style="color: green;cursor: pointer;" value="Y" name="FAV_ACTIVE"
+                            for="FAV_ACTIVE">Active</label>
+
+                        <label *ngIf="isinactive" style="color: red;cursor: pointer;" for="FAV_ACTIVE" value="D"
+                            name="FAV_ACTIVE">In-Active</label>
+                    </label>
+                </div>
+                <div>
+                    <span style=" display: flex;justify-content: center; ;">
+                        <button type="button" class="btn " style="background-color: skyblue;color: #fff;"
+                            (click)="addfavorites()" *ngIf="save1 " data-dismiss="modal">Save</button> &nbsp;
+                        <button class="btn" style="background-color: skyblue;color: #fff;" type="submit"
+                            (click)="saveedit()" *ngIf="save2" data-dismiss="modal">Save</button>
+                        <button type="button" class="btn btn-warning ms-2" data-dismiss="modal"
+                            (click)="cancel()">Cancel</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
