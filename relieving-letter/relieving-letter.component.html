@@ -1,0 +1,150 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row row-db">
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    <span style=" float: left;">RELIEVING LETTER</span>
+                    <div style=" float: right;">
+                        <span class="add-panel"><i class="fas fa-plus-circle"></i> add</span>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="dashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" *ngIf="letterForm">
+        <form [formGroup]="RLform">
+            <div class="col-lg-12 form-content">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2"> Date</label>
+                            <input type="date" [(ngModel)]="dateToday" name="dateToday" class="form-control"
+                                formControlName="dateToday" placeholder="Date"
+                                [ngClass]="{ 'is-invalid': submitted && f.dateToday.errors }">
+                            <div *ngIf="submitted && f.dateToday.errors" class="invalid-feedback">
+                                <div *ngIf="f.dateToday.errors.required">Date is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2">Employee</label>
+                            <select class="form-select" aria-label="Default select example" name="type"
+                                formControlName="employee" (change)="onChange($event.target.value, id)"
+                                [ngClass]="{ 'is-invalid': submitted && f.employee.errors }">
+                                <option value="" selected disabled>*Select Employee</option>                                
+                                <option *ngFor="let user of userData" value="{{user.U_ID}}">{{user.U_NAME}}</option>
+                            </select>
+                            <div *ngIf="submitted && f.employee.errors" class="invalid-feedback">
+                                <div *ngIf="f.employee.errors.required">Employee Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2">Join Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="joinDate" name="joinDate"
+                                formControlName="joinDate" placeholder="Date"
+                                [ngClass]="{ 'is-invalid': submitted && f.joinDate.errors }">
+                            <div *ngIf="submitted && f.joinDate.errors" class="invalid-feedback">
+                                <div *ngIf="f.joinDate.errors.required">Join Date is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2">Last Date</label>
+                            <input type="date" class="form-control" name="endDate" [(ngModel)]="endDate"
+                                formControlName="endDate" placeholder="Date"
+                                [ngClass]="{ 'is-invalid': submitted && f.endDate.errors }">
+                            <div *ngIf="submitted && f.endDate.errors" class="invalid-feedback">
+                                <div *ngIf="f.endDate.errors.required">End Date is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-4 ">
+                        <button type="submit" class="btn btn-primary" (click)="preview()">
+                            Preview
+                        </button>
+                        <!-- <button type="submit" class="btn btn-primary" data-bs-target="#gridSystemModal" (click)="preview()">
+                        Preview
+                    </button> -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="main-container" id="print-section" *ngIf="letter">
+        <div class="main-content " style="padding: 5% 15%; " *ngFor="let user of singleUser">
+            <div class="frame" id="pdf-section"
+                style=" background: white; padding: 10%;  font-family: Verdana, Geneva, Tahoma, sans-serif;">
+                <div class="image">
+                    <div class="logo-images pt-5" style="text-align: center;  padding-bottom: 80px;">
+                        <img src="../../../assets/Images/spyhre-logo.png">
+                    </div>
+                    <div class="bd-example-row">
+                        <div class="row ">
+                            <div class="col-md-4 ms-auto date-left" style="text-align: end;">{{dateToday | date: 'MMMM
+                                d, yyyy'}}
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 2rem; padding-bottom: 2rem;">
+                            <div class="col-md-12 ">Dear <b>{{user.U_GENDER=='F'?'Mrs':'Mr'}}.{{user.U_NAME}}</b></div>
+                        </div>
+                        <div class="row" style="text-align: center; padding-bottom: 20px;">
+                            <div class="col-md-12 "><b><u>Sub: Relieving Letter</u></b></div>
+                        </div>
+
+                        <div class="row">
+                            <p class="col-md-12 ">
+                                This has reference to your resignation. We wish to inform you that the same has been
+                                accepted and you will be relieved from the services of the organization w.e.f the Close
+                                of
+                                work hours on {{endDate | date: 'EEEE, MMMM d, yyyy'}}.</p>
+                            <p class="col-md-12 ">During your tenure with us from <b>{{user.U_DOJ | date: 'MMMM d,
+                                    yyyy'}}</b> to <b>{{endDate | date: 'MMMM d, yyyy'}},</b> we have observed that you
+                                have been
+                                sincere and hard working in delivering the job assigned to you. </p>
+                            <p class="col-md-12 ">We wish you success in your future endeavors. </p>
+                        </div>
+                        <div class="row" style="padding-top: 1rem; padding-bottom: 1.5rem;">
+                            <p class="col-md-12 ">
+                                For Spyhre Software Solutions Pvt Ltd.
+                            </p>
+                        </div>
+                        <div class="row">
+                            <img src="../../../assets/Images/HR-manager-sign.png"
+                                style="height: 60px; width: 150px;"><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" *ngFor="let HR of userHR">{{HR.U_NAME}}</div><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">Manager HR</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" style="text-align: center;">
+            <div class="col-lg-12">
+                <button printSectionId="print-section" styleSheetFile="assets/relievingform.scss"
+                    class="btn btn-primary" ngxPrint>Print</button>
+                <button class="btn btn-secondary mx-2" value="CPTURE" (click)="captureScreen()">Send to email</button>
+                <button type="button" class="btn btn-danger" (click)="Close()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

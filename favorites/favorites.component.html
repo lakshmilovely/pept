@@ -1,0 +1,296 @@
+<app-header></app-header>
+<div class="container ">
+    <div class="row row-db" *ngIf="showGrid" >
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    <span style=" float: left;">FAVORITES</span>
+                    <div style=" float: right;">
+                        <span class="add-panel"  (click)="addopen()"><i class="fas fa-plus-circle"></i> add</span>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="dashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse" *ngIf="showAddPanel">
+        <div class="head-bg">
+            <div class="navbar-header ">
+                <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                    style="float: right;">
+                    <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+                </a>
+                
+                <span class="navbar-brand" *ngIf="save2">FAVOURITES (Edit)</span>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="pt-3"><span (click)="viewall()">view all</span></li>
+                    <li class="pt-3"><a href="dashboard" style="text-decoration: none; color: #ffffff;">dashboard</a>
+                    </li>
+                    <li class="pt-3 pb-2"><a href="#" style="text-decoration: none; color: #ffffff;">project
+                            dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-inverse" *ngIf="showAddPanel">
+        <div class="head-bg">
+            <div class="navbar-header ">
+                <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                    style="float: right;">
+                    <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+                </a>
+                
+                <span class="navbar-brand" *ngIf="save2">FAVOURITES (Edit)</span>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="pt-3"><span (click)="viewall()">view all</span></li>
+                    <li class="pt-3"><a href="dashboard" style="text-decoration: none; color: #ffffff;">dashboard</a>
+                    </li>
+                    <li class="pt-3 pb-2"><a href="#" style="text-decoration: none; color: #ffffff;">project
+                            dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row row-db" *ngIf="showAddPanel">
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    
+                    <span style=" float: left;" *ngIf="save2">FAVOURITES (Edit)</span>
+                    <div style=" float: right;">
+                        <span (click)="viewall()" class="add-panel"> view all</span>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="dashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container"   *ngIf="showGrid">
+        <div class="container pt64 ">
+           
+            <div class="row ">
+               
+                <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 mt-5">
+                    <div class="table-scroll">
+                        <table class="flex-table flex-table-aligned table table-striped table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th style="width: 20%;">Title</th>
+                                    <th  style="width: 30%;">Page URL</th>
+                                    <th style="width: 20%;">Show In Dashboard</th>
+                                    <th style="width: 20%;">Status</th>
+                                    <th style="width: 20%;">Date</th>
+                                    <th style="width: 10%;">Edit</th>
+                                    <th style="width: 10%;">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody class="scroll" >
+                                
+                                <tr class="text-center" *ngFor="let x of FavData">
+                                   
+                                    <td class="tdspname" style="width: 20%;">{{x.FAV_TITLE}}</td>
+                                    <td class="tdspname" style="width: 30%;">{{x.FAV_URL}}</td>
+                                    <td class="tdspname" style="width: 20%;">{{x.FAV_SHOW_IN_DASHBOARD ==  'Y'?'Yes': 'No'}}</td>
+                                
+                                    <td   style="width: 20%;" [ngClass]="x.FAV_ACTIVE=='Y'?'ACTIVE':'INACTIVE'"> {{x.FAV_ACTIVE =='Y'?'Active':'InActive'}}</td>
+                                    <td  style="width: 20%;">{{x.FAV_TS | date: 'M/dd/yyyy'}}</td>
+                                    <td class="tdspname" style="width: 10%;">
+                                        <a><img title="Edit" class="edit-panel actions" (click)="EditPanel(x)" src="../../../assets/Images/edt_icon.png"></a>
+                                    </td>
+                                    <td class="tdspname" style="width: 10%;" >
+                                        <a><img title="Delete" class="actions"  (click)="delete(x)"  src="../../../assets/Images/del_gry.png"></a>      
+                                    </td>
+                                </tr>  
+                          
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                                                    <!-- EDIT - FORM -->
+
+    <!-- <div class="container-fluid" *ngIf="showAddPanel">
+        <form [formGroup]="EditForm">
+            <div class="col-lg-12 form-content">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2">Edit  Favourite</label>
+                            <input type="text" formControlName="title1" name="Title" class="form-control"
+                                placeholder="Title"
+                                [ngClass]="{ 'is-invalid': submitted && f2.title1.errors }">
+                            <div *ngIf="submitted && f2.title1.errors">
+                                <div *ngIf="f2.title1.errors.required">Title is required*</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2">PageURL</label>
+                            <input type="text" formControlName="pageurl1" name="date" class="form-control"
+                                placeholder="PageURL" [ngClass]="{ 'is-invalid': submitted && f2.pageurl1.errors }">
+                            <div *ngIf="submitted && f2.pageurl1.errors">
+                                <div class="text-danger" *ngIf="f2.pageurl1.errors.required"> Page URL is required*</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" class="mb-2">Sequence</label>
+    
+                          <input type="text"  id="Sequence" style="width :100%"   class="form-control" placeholder="sequence" formControlName="sequence1"  [ngClass]="{'is-invalid':submitted && f2.sequence1.errors}">
+                                <div *ngIf="submitted && f2.sequence1.errors">
+                                    <div class="text-danger" *ngIf="f2.sequence1.errors.required"> Sequence is required*</div>
+                                </div>
+                              </div>     
+                        </div>
+                    </div>
+                     
+                  
+                              <br>
+                        <div class="form-check">
+                            <div class="col-6">
+                  
+                                <label style="margin: 1px;float: left;font-size: 20px;" for="FAV_ACTIVE"  >
+                                            
+                                <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"   (change)="status($event.target.checked)"   name="FAV_ACTIVE" formControlName="FAV_ACTIVE">&nbsp;
+                               
+                                <label *ngIf="isactive"   style="color: green;cursor: pointer;" value="Y" name="FAV_ACTIVE" for="FAV_ACTIVE">Active</label>
+                      
+                                <label *ngIf="isinactive" style="color: red;cursor: pointer;"    for="FAV_ACTIVE"  value="D" name="FAV_ACTIVE">In-Active</label>
+                                
+                                </label>
+                        
+                            </div>
+                       
+                      </div>            
+                
+                <div class="row mt-4">
+                    <div class="col-lg-4 ">
+                       
+                        <button class="btn"  style="background-color: skyblue;color: #fff;" type="submit" (click)="saveedit()" >Save</button>
+                        <button class="btn btn-warning ms-2" (click)="Cancel()">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div> -->
+
+
+    
+</div>
+<!-- ------add form Modal-------- -->
+<div  class="modal fade mb-5" id="addform" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"  >
+    <div class="modal-dialog modal-dialog-centered modal-lg" style=" min-block-size: fit-content;">
+      <div class="modal-content mx-2 ms-2">
+        
+            <div class="modal-header"
+              style="background: linear-gradient(to right, rgb(0, 41, 88) 0%, rgba(255,175,75,0) 100%) !important;height: 65px;">
+            <div class="row row-db">
+                <!-- <div class="col-lg-12"> -->
+                    <!-- <div class="head-bg"> -->
+                        <div  class="tabel-cell">
+                            <img src="assets\Images\Logo_spyhre.png" alt="Spyhre"   style="width: 117px" class="logospy" >
+                        </div>
+                    <!-- </div> -->
+                <!-- </div> -->
+            </div>
+            
+          <a type="button" class="btn-close" data-dismiss="modal" aria-label="Close" aria-hidden="true">
+          
+          </a>
+
+        
+        </div>
+        <div class="modal-body" >
+            <h5  style="text-align:center; color:skyblue">User Favourite</h5>
+         
+            <form  [formGroup]="favouriteaddForm" >
+                <div class="form-group">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <label for="Title">Title</label> <br>
+                            <input type="text" id="Title" style="width :100%"  placeholder="Title" formControlName="Title"  
+                            [ngClass]="{'is-invalid':submitted && f.Title.errors}">
+
+                            <div *ngIf="submitted && f.Title.errors"  class="invalid-feedback">
+                                <div class="text-danger" *ngIf="f.Title.errors.required">Title is required*</div>
+                            </div>
+                        </div>
+                    
+                        <div class="col-lg-6">
+                            <label for="Pageurl">Page URL</label><br>
+                            <input type="text" id="Pageurl" style="width :100%"   placeholder="Page URL"   formControlName="PageURL"  [ngClass]="{'is-invalid':submitted && f.PageURL.errors}">
+                            <div *ngIf="submitted && f.PageURL.errors"  class="invalid-feedback">
+                                <div class="text-danger" *ngIf="f.PageURL.errors.required"> Page URL is required*</div>
+                            </div>
+                        </div>   
+
+                        <div class="col-lg-6">
+                            <label for="Sequence">Sequence</label><br>
+                            <input type="text"  id="Sequence" style="width :100%"  placeholder="Sequence" formControlName="Sequence"  [ngClass]="{'is-invalid':submitted && f.Sequence.errors}">
+                            <div *ngIf="submitted && f.Sequence.errors"  class="invalid-feedback">
+                                <div class="text-danger" *ngIf="f.Sequence.errors.required"> Sequence is required*</div>
+                            </div>
+                          </div>                                                           
+                    </div>
+
+                </div> <br>
+                
+              
+               
+                <div class="form-check" *ngIf="checkbox1">
+                    <input  type="checkbox" value="" id="defaultCheck1">
+                    <label  for="defaultCheck1">
+                   Show In Favourite
+                    </label>
+                  </div> 
+
+                  <div class="form-check"  *ngIf="checkbox" >
+                    
+                  
+                        <label style="margin: 1px;float: left;font-size: 20px;" for="FAV_ACTIVE"  >
+                                    
+                        <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"   (change)="status($event.target.checked)"   name="FAV_ACTIVE" formControlName="FAV_ACTIVE">&nbsp;
+                       
+                        <label *ngIf="isactive"   style="color: green;cursor: pointer;" value="Y" name="FAV_ACTIVE" for="FAV_ACTIVE">Active</label>
+              
+                        <label *ngIf="isinactive" style="color: red;cursor: pointer;"    for="FAV_ACTIVE"  value="D" name="FAV_ACTIVE">In-Active</label>
+                        
+                        </label>
+                
+                    
+                  </div>            
+                    
+            <div > 
+                <span style=" display: flex;justify-content: center; ;">
+            <button type="button" class="btn "   style="background-color: skyblue;color: #fff;"   (click)="addfavorites()" *ngIf="save1 " data-dismiss="modal" >Save</button> &nbsp;
+            <button class="btn"  style="background-color: skyblue;color: #fff;" type="submit" (click)="saveedit()"  *ngIf="save2"   data-dismiss="modal">Save</button>
+            <button type="button"class="btn btn-warning ms-2"  data-dismiss="modal"(click)="Cancel()">Cancel</button>
+            </span>
+            </div>
+            
+    </form>
+    
+</div>
+      </div>
+    </div>
+  </div>
+

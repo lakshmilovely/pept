@@ -1,0 +1,124 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<app-header></app-header>
+<div class="container">
+  <div class="row row-db">
+    <div class="col-md-12">
+      <div class="head-bg">
+        <div class="head-bg-left">
+          <span style=" float: left;">SPYHRE TEAM</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table123">
+    <div id="scrollMe" class="scroll" #scrollMe>
+      <div style="background: rgba(0,0,0,0.5);" *ngIf="ourteam123">
+
+        <nav *ngIf="nav123">
+          <H4 class="indianoffice ms-3 pt-3">Indian Office</H4>
+        </nav>
+
+        <div class="teamgrid mx-auto">
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12 pb-4" *ngFor="let x of result">
+              <div>
+                <div *ngIf="x.U_ACTIVE != 'D'" class="card p-2"
+                  style="background-color: black; border-color: whitesmoke; height: 96px;">
+                  <div class="row">
+                    <div class="col-lg-4 col-4">
+                      <img src="https://sepapi.azaz.com/api/resources/images/{{x.U_PROFILE_IMAGE}}"
+                        onerror="this.src='assets/Images/profile-img.png'" class="image123">
+                    </div>
+                    <div class="col-lg-6 col-6">
+                      <p class="name py-0 my-0">{{x.U_NAME }}</p>
+                      <p class="designation py-0 my-0">{{x.U_DESIGNATION_NAME}}</p>
+                      <p class="online py-0 my-0">Online</p>
+                    </div>
+                    <div class="col-lg-2 col-2 text-end">
+                      <a (click)="popup(x)" class="eyeicon" data-bs-toggle="modal" data-bs-target="#myModal123">
+                        <abbr title="View Profile"><i class="fa fa-eye" style="cursor: pointer;"></i></abbr></a><br>
+                      <a (click)="popup(x)" class="commenticon" data-bs-toggle="modal" data-bs-target="#myModal456">
+                        <abbr title="comment"><i class="fa fa-comment" style="cursor: pointer;"></i></abbr></a><br>
+                      <a class="cardicon" data-bs-toggle="modal" data-bs-target="#myModal">
+                        <abbr title="Employee Id Card"><img style="cursor: pointer;"
+                            src="../../../assets/Images/id-card.png" (click)="open(x)"></abbr></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="favlink" class="col-md-12" style="text-align: right; float: right; display: block;">
+        <div class="mx-3 mb-3 mt-3">
+          <a href="#" id="addfavoriteslink">
+            <i class="fa fa-star" aria-hidden="true"></i>&nbsp;add to favorites</a>
+        </div>
+      </div>
+    </div>
+  </table>
+</div>
+
+
+<!-- ------Employee view Modal---------- -->
+<div class="modal fade mb-5" id="myModal123" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" style=" min-block-size: fit-content;">
+    <div class="modal-content mx-2 ms-2">
+      <div class="modal-header"
+        style="background: linear-gradient(to right, rgb(0, 41, 88) 0%, rgba(255,175,75,0) 100%) !important;height: 65px;">
+        <div class="pop-header table">
+          <div class="tabel-cell mt-3">
+            <img src="assets\Images\spyhre-logoemail.png" class="img-responsive" alt="spyhre">
+          </div>
+        </div>
+        <div style="cursor: pointer;">
+          <a class="close-link" data-bs-dismiss="modal" aria-label="Close"
+            style="text-decoration: none !important; font-size: 20px;">x</a>
+        </div>
+      </div>
+      <div class="modal-body" style="margin: 10px 100px;">
+        <div class="pb-2">
+          <h4 style="text-align: center; color: cornflowerblue; ">Profile view</h4>
+        </div>
+        <div class="row">
+          <div class="formcontrol col-md-12 col-sm-12 col-xs-12" align="left" style="display: flex;">
+            <div class="col-md-3 col-sm-3 col-xs-3 ">
+              <img class="profile-img" src="https://sepapi.azaz.com/api/resources/images/{{popupdata_U_PROFILE_IMAGE}}"
+                onerror="this.src='assets/Images/profile-img.png'" class="card-img-top" alt="...">
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9 mx-3">
+              <div class="formcontrols"><label class="control-label ">Employee Name:</label>
+                <span class="ms-2" style="color:#000;">{{popupdata_Uname}}</span>
+              </div>
+              <div class="formcontrols"><label class="control-label">Designations:</label>
+                <span class="ms-2" style="color:#000;">{{popupdata_designation}}</span>
+              </div>
+              <div class="formcontrols"><label class="control-label ">Location:</label>
+                <span class="ms-2" style="color:#000;">{{popupdata_Location}}</span>
+              </div>
+              <div class="formcontrols"><label class="control-label">Email:</label>
+                <span class="ms-2" style="color:#000;">{{popupdata_Email}}</span>
+              </div>
+              <div class="formcontrols"><label class="control-label">Phone Number:</label>
+                <span class="ms-2" style="color:#000;">{{popupdata_U_PHONE_MOBILE}}</span>
+              </div>
+              <div class="formcontrols"><label class="control-label ">Mobile Number:</label>
+                <span class="ms-2" style="color:#000;">{{popupdata_U_Primary_MOBILE}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="action3" class="col-md-12 cd-sm-12 cd-xs-12 text-center" style="position: inherit;">
+          <input type="button" id="btnbackpf" class="btn btn-warning" data-bs-dismiss="modal" tabindex="1"
+            value="Close">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <app-loader-animation *ngIf="loader"></app-loader-animation> -->

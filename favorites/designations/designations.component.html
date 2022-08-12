@@ -1,0 +1,62 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<app-header></app-header>
+<div class="container">
+    <div class="row row-db">
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    <span style=" float: left;">DESIGNATION (edit)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="backgr">
+        <div class="row ms-3">
+            <label class="desig mt-3">Designation</label>
+            <div class="col-lg-4 col-sm-8 mt-1">
+                <select class="form-select" [(ngModel)]="employeedesignation" disabled
+                    aria-label="Default select example">
+                    <option value="">Select Designation*</option>
+                    <option *ngFor="let list of designationData" [value]="list.DES_ID">{{list.DES_NAME}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-lg-3 mt-4" *ngFor="let list of moduleData; let i=index">
+                    <div class="bg-dark text-white p-2" *ngIf="list.MOD_ID != 0 && list.SMOD_M_ID == 0">
+                        <div class="form-check">
+                            <input class="form-check-input " type="checkbox" value="" id="{{list.MOD_ID}}"
+                                [checked]="list.status=='Y'" (change)="checkModule(list, $event)">
+                            <label class="form-check-label mods" for="{{list.MOD_ID}}">
+                                {{list.MOD_NAME}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="scroll" *ngIf="list.MOD_ID != 0 && list.SMOD_M_ID == 0">
+                        <div class="ms-3 my-1 " *ngFor="let subitems of moduleData">
+                            <div *ngIf="subitems.SMOD_M_ID == list.MOD_ID && list.MOD_ID != 0">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="{{subitems.SMOD_ID}}"
+                                        [checked]="subitems.status=='Y'"
+                                        (change)="checkSubmodule(subitems, list, $event)">
+                                    <label class="form-check-label" for="{{subitems.SMOD_ID}}">
+                                        {{subitems.SMOD_NAME}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5 mb-4" style="text-align: center;">
+            <div class="col-12">
+                <button class="btn btn-info" (click)="saveRolePermisssions()" type="submit">Submit</button>&nbsp;
+                <button class="btn btn-warning" (click)="canceldesignationEdit()" type="submit">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>

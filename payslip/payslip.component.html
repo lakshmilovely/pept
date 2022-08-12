@@ -1,0 +1,407 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row row-db">
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    <span style=" float: left;">PAY SLIP</span>
+                    <div style=" float: right;">
+                        <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                        <span class="sm-verticle-bar"></span>
+                        <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="payslipGrid">
+    <div class="container-file pt-5">
+        <div class="row">
+            <div class="col-7">
+                <img src="../../../assets/Images/excel-file.png" style="cursor: pointer;" class="ms-3" height="50"
+                    width="50" (click)="selectFile.click()">
+                &nbsp;<label style="color: white;">Upload</label>
+                <input class="m-3" type="file" style="display: none;" (change)="onFileChange($event)"
+                    accept=".xlsx, .xls, .csv, .ods" multiple="false" #selectFile>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <select class="form-select" [(ngModel)]="selectedmonth"
+                        (change)="getdate($event.target.value,'m',startYear,endYear)">
+                        <option *ngFor="let month of months" value="{{month.id}}">
+                            {{month.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <select class="form-select" (change)="getdate($event.target.value,'y',startYear,endYear)"
+                        [(ngModel)]="selectedyear">
+                        <option *ngFor="let yr of selectedYear" [value]="yr.index">{{yr.year}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard border-bottom border-white mt-3">
+            <div class="pt-2">
+                <div class="col-12 mx-auto">
+                    <div class="row">
+                        <div class="col-1 text-center">
+                            <input class="form-check-input" type="checkbox" value="" (change)="checkParent($event)">
+                        </div>
+                        <div class="col-3 tdspname">
+                            <label>Employee Name</label>
+                        </div>
+                        <div class="col-3 tdspname">
+                            <label>PDF Status</label>
+                        </div>
+                        <div class="col-3 tdspname">
+                            Mail Status
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contentss">
+            <div class="dashboard">
+                <div class="boxShadow pt-2">
+                    <div class="col-12 mx-auto">
+                        <div class="row p-2" *ngFor="let d of data; let i = index">
+                            <div class="col-1 text-center">
+                                <input class="form-check-input" type="checkbox" [checked]="d.ischecked"
+                                    (change)="checkSingleParent($event,i)">
+                            </div>
+                            <div class="col-3 text-center">
+                                <label>{{d.FirstName}}&nbsp;{{d.LastName}}</label>
+                            </div>
+                            <div class="col-2 text-center ms-auto">
+                                <button class="btn btn-primary" (click)="payslipShow(d)">Pay Slip</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center mt-2">
+            <div class="col-lg-12">
+                <button class="btn btn-info mx-2" (click)="savePayslip()">Save</button>
+                <button class="btn btn-secondary mx-2" (click)="multipayslips()" [disabled]="mailCount == 0">Send Mail
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngFor="let pay of multiPDFS; let ind = index">
+    <div class="container-fluid pt-5" id="pdf-section{{ind}}" style="display: none;">
+        <div class="card border-success mb-3 mx-auto" style="max-width: 80%;">
+            <div class="card-header bg-transparent border-success text-center"
+                style="background-color: black !important;">
+                <img style="height: 90px;" src="../../../assets/Images/spyhre-logoemail.png">
+            </div>
+            <div class="card-body text-success">
+                <div class="mx-5" style="text-align: end; font-size: larger;">May-2022</div>
+                <table class="mx-auto">
+                    <tr>
+                        <th>Employee Name: &nbsp;&nbsp;{{pay.FirstName}}&nbsp;{{pay.LastName}}</th>
+                        <th>Employee Code: &nbsp;&nbsp;{{pay.EmployeeCode}}</th>
+                    </tr>
+                    <tr>
+                        <td>Designation:</td>
+                        <td>Department:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Days Worked:</td>
+                    </tr>
+                    <tr>
+                        <td>Acct No: &nbsp;&nbsp;{{pay.BankName}} - {{pay.BankAccountNumber}}</td>
+                        <td>PF Acct No</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>UAN: </td>
+                    </tr>
+                </table>
+                <br>
+                <table class="table mx-auto table-bordered text-center">
+                    <tr>
+                        <td colspan="2">Earning</td>
+                        <td colspan="2">Deductions</td>
+                        <td colspan="2">Summary</td>
+                    </tr>
+                    <tr>
+                        <td>Head</td>
+                        <td>Amount</td>
+                        <td>Head</td>
+                        <td>Amount</td>
+                        <td>Head</td>
+                        <td>Amount</td>
+                    </tr>
+                    <tr>
+                        <td>Basic</td>
+                        <td>{{pay.Basic}}</td>
+                        <td>Provident Fund</td>
+                        <td>{{pay.ProvidentFund}}</td>
+                        <td>Gross Pay</td>
+                        <td>{{pay.GrossPay}}</td>
+                    </tr>
+                    <tr>
+                        <td>HRA</td>
+                        <td>{{pay.HRA}}</td>
+                        <td>Professional Tax</td>
+                        <td>{{pay.ProfessionalTax}}</td>
+                        <td>Deductions</td>
+                        <td>{{pay.Deductions}}</td>
+                    </tr>
+                    <tr>
+                        <td>Conveyance</td>
+                        <td>{{pay.Conveyance}}</td>
+                        <td>Income Tax</td>
+                        <td>{{pay.IncomeTax}}</td>
+                    </tr>
+                    <tr>
+                        <td>Medical Allowance</td>
+                        <td>{{pay.MedicalAllowance}}</td>
+                        <td>Loan Amount</td>
+                        <td>{{pay.LoanAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Special Allowance</td>
+                        <td>{{pay.SpecialAllowance}}</td>
+                        <td>ESI Amount</td>
+                        <td>{{pay.ESIAmount}}</td>
+                    </tr>
+                </table>
+                <div class="ms-5" style="text-align: left; font-size: larger;">Total :</div>
+                <table class="table mx-auto table-bordered text-center">
+                    <tr>
+                        <td class="fw-bolder">Gross Pay</td>
+                        <td>{{pay.GrossPay}}</td>
+                        <td class="fw-bolder">Deductions</td>
+                        <td>{{pay.Deductions}}</td>
+                        <td class="fw-bolder">Net Pay</td>
+                        <td>{{pay.NetPay}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="container" *ngIf="payslip">
+    <div class="container-fluid pt-5" id="pdf-section">
+        <div class="card border-success mb-3 mx-auto" style="max-width: 80%;">
+            <div class="card-header bg-transparent border-success text-center"
+                style="background-color: black !important;">
+                <img style="height: 90px;" src="../../../assets/Images/spyhre-logoemail.png">
+            </div>
+            <div class="card-body text-success">
+                <div class="mx-5" style="text-align: end; font-size: larger;">May-2022</div>
+                <table class="mx-auto">
+                    <tr>
+                        <th>Employee Name: &nbsp;&nbsp;{{pay.FirstName}}&nbsp;{{pay.LastName}}</th>
+                        <th>Employee Code: &nbsp;&nbsp;{{pay.EmployeeCode}}</th>
+                    </tr>
+                    <tr>
+                        <td>Designation:</td>
+                        <td>Department:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Days Worked:</td>
+                    </tr>
+                    <tr>
+                        <td>Acct No: &nbsp;&nbsp;{{pay.BankName}} - {{pay.BankAccountNumber}}</td>
+                        <td>PF Acct No</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>UAN: </td>
+                    </tr>
+                </table>
+                <br>
+                <table class="table mx-auto table-bordered text-center">
+                    <tr>
+                        <td colspan="2">Earning</td>
+                        <td colspan="2">Deductions</td>
+                        <td colspan="2">Summary</td>
+                    </tr>
+                    <tr>
+                        <td>Head</td>
+                        <td>Amount</td>
+                        <td>Head</td>
+                        <td>Amount</td>
+                        <td>Head</td>
+                        <td>Amount</td>
+                    </tr>
+                    <tr>
+                        <td>Basic</td>
+                        <td>{{pay.Basic}}</td>
+                        <td>Provident Fund</td>
+                        <td>{{pay.ProvidentFund}}</td>
+                        <td>Gross Pay</td>
+                        <td>{{pay.GrossPay}}</td>
+                    </tr>
+                    <tr>
+                        <td>HRA</td>
+                        <td>{{pay.HRA}}</td>
+                        <td>Professional Tax</td>
+                        <td>{{pay.ProfessionalTax}}</td>
+                        <td>Deductions</td>
+                        <td>{{pay.Deductions}}</td>
+                    </tr>
+                    <tr>
+                        <td>Conveyance</td>
+                        <td>{{pay.Conveyance}}</td>
+                        <td>Income Tax</td>
+                        <td>{{pay.IncomeTax}}</td>
+                    </tr>
+                    <tr>
+                        <td>Medical Allowance</td>
+                        <td>{{pay.MedicalAllowance}}</td>
+                        <td>Loan Amount</td>
+                        <td>{{pay.LoanAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Special Allowance</td>
+                        <td>{{pay.SpecialAllowance}}</td>
+                        <td>ESI Amount</td>
+                        <td>{{pay.ESIAmount}}</td>
+                    </tr>
+                </table>
+                <div class="ms-5" style="text-align: left; font-size: larger;">Total :</div>
+                <table class="table mx-auto table-bordered text-center">
+                    <tr>
+                        <td class="fw-bolder">Gross Pay</td>
+                        <td>{{pay.GrossPay}}</td>
+                        <td class="fw-bolder">Deductions</td>
+                        <td>{{pay.Deductions}}</td>
+                        <td class="fw-bolder">Net Pay</td>
+                        <td>{{pay.NetPay}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="row text-center mt-2">
+        <div class="col-lg-12">
+            <button class="btn btn-secondary mx-2" value="CPTURE" (click)="captureScreen()">Send to
+                email</button>
+            <button type="button" class="btn btn-danger" (click)="closePayslip()">Close</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="Allpayslips">
+    <div class="container-fluid pt-5" id="pdf-section">
+        <div class="card border-success mb-3 mx-auto" style="max-width: 80%;" *ngFor="let allpay of data">
+            <div class="card-header bg-transparent border-success text-center"
+                style="background-color: black !important;">
+                <img style="height: 90px;" src="../../../assets/Images/spyhre-logoemail.png">
+            </div>
+            <div class="card-body text-success">
+                <div class="mx-5" style="text-align: end; font-size: larger;">May-2022</div>
+                <table class="mx-auto">
+                    <tr>
+                        <th>Employee Name: &nbsp;&nbsp;{{allpay.FirstName}}&nbsp;{{allpay.LastName}}</th>
+                        <th>Employee Code: &nbsp;&nbsp;{{allpay.EmployeeCode}}</th>
+                    </tr>
+                    <tr>
+                        <td>Designation:</td>
+                        <td>Department:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Days Worked:</td>
+                    </tr>
+                    <tr>
+                        <td>Acct No: &nbsp;&nbsp;{{allpay.BankName}} - {{allpay.BankAccountNumber}}</td>
+                        <td>PF Acct No</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>UAN: </td>
+                    </tr>
+                </table>
+                <br>
+                <table class="table mx-auto table-bordered text-center">
+                    <tr>
+                        <td colspan="2">Earning</td>
+                        <td colspan="2">Deductions</td>
+                        <td colspan="2">Summary</td>
+                    </tr>
+                    <tr>
+                        <td>Head</td>
+                        <td>Amount</td>
+                        <td>Head</td>
+                        <td>Amount</td>
+                        <td>Head</td>
+                        <td>Amount</td>
+                    </tr>
+                    <tr>
+                        <td>Basic</td>
+                        <td>{{allpay.Basic}}</td>
+                        <td>Provident Fund</td>
+                        <td>{{allpay.ProvidentFund}}</td>
+                        <td>Gross Pay</td>
+                        <td>{{allpay.GrossPay}}</td>
+                    </tr>
+                    <tr>
+                        <td>HRA</td>
+                        <td>{{allpay.HRA}}</td>
+                        <td>Professional Tax</td>
+                        <td>{{allpay.ProfessionalTax}}</td>
+                        <td>Deductions</td>
+                        <td>{{allpay.Deductions}}</td>
+                    </tr>
+                    <tr>
+                        <td>Conveyance</td>
+                        <td>{{allpay.Conveyance}}</td>
+                        <td>Income Tax</td>
+                        <td>{{allpay.IncomeTax}}</td>
+                    </tr>
+                    <tr>
+                        <td>Medical Allowance</td>
+                        <td>{{allpay.MedicalAllowance}}</td>
+                        <td>Loan Amount</td>
+                        <td>{{allpay.LoanAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Special Allowance</td>
+                        <td>{{allpay.SpecialAllowance}}</td>
+                        <td>ESI Amount</td>
+                        <td>{{allpay.ESIAmount}}</td>
+                    </tr>
+                </table>
+                <div class="ms-5" style="text-align: left; font-size: larger;">Total :</div>
+                <table class="table mx-auto table-bordered text-center">
+                    <tr>
+                        <td class="fw-bolder">Gross Pay</td>
+                        <td>{{allpay.GrossPay}}</td>
+                        <td class="fw-bolder">Deductions</td>
+                        <td>{{allpay.Deductions}}</td>
+                        <td class="fw-bolder">Net Pay</td>
+                        <td>{{allpay.NetPay}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="row text-center mt-2">
+        <div class="col-lg-12">
+            <button class="btn btn-secondary mx-2" value="CPTURE" (click)="captureScreen()">Send to
+                email</button>
+            <button type="button" class="btn btn-danger" (click)="closeAllPayslips()">Close</button>
+        </div>
+    </div>
+</div> -->

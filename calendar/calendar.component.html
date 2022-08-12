@@ -1,0 +1,344 @@
+<app-header></app-header>
+<div>
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+    <div class="container">
+        <div class="row row-db" *ngIf="loader">
+            <div class="col-md-12">
+                <div class="head-bg">
+                    <div class="head-bg-left">
+
+                        <span style=" float: left; font-size: 18px; font-weight: 400;">CALENDAR</span>
+                        <div class="col-md-2">
+                            <select class="form-select"
+                                style="background: rgba(10,160,194,1); border-radius: 3px;color: #fff;"
+                                (change)="onChange($event.target.value)">
+                                <!-- <option  style="background: rgba(10,160,194,1); color: #fff;"
+                                    *ngFor="let x of  ByEmployees"  value="{{x.u_id}}">{{x.name}}</option> -->
+                                <option style="background: rgba(10,160,194,1); color: #fff;"
+                                    *ngFor="let p of ByEmployees.Employeee;" [value]="p.u_id"> {{p.name}}</option>
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-3" style="padding-left: 0px;">
+                            <select class="form-select"
+                                style="background: rgba(10,160,194,1); border-radius: 3px;color: #fff;"
+                                *ngIf="byEmployee" (change)="onSelect($event.target.value)">
+                                <option style="background: rgba(10,160,194,1); color: #fff;" value="" selected disabled>
+                                    -- Select --
+                                </option>
+                                <option style="background: rgba(10,160,194,1); color: #fff;"
+                                    *ngFor="let user of usersNames" value="{{user.U_ID}}">{{user.U_NAME}}</option>
+                            </select>
+                            <select class="form-select"
+                                style="background: rgba(10,160,194,1); border-radius: 3px;color: #fff;"
+                                *ngIf="byLocation" (change)="onSelectEvent($event.target.value)"
+                                [(ngModel)]="selectedID">
+                                <option style="background: rgba(10,160,194,1); color: #fff;" value="" selected disabled>
+                                    -- Select --
+                                </option>
+                                <option style="background: rgba(10,160,194,1); color: #fff;"
+                                    *ngFor="let location of locationsData" value="{{location.LOC_ID}}">
+                                    {{location.LOC_NAME}}</option>
+                            </select>
+                            <select class="form-select"
+                                style="background: rgba(10,160,194,1); border-radius: 3px;color: #fff;"
+                                *ngIf="byproject" (change)="onSelectEvent($event.target.value)">
+                                <option style="background: rgba(10,160,194,1); color: #fff;" value="" selected disabled>
+                                    -- Select --
+                                </option>
+                                <option style="background: rgba(10,160,194,1); color: #fff;" *ngFor="let p of Projects"
+                                    value="{{p.PRJ_ID}}">
+                                    {{p.PRJ_NAME}}</option>
+                            </select>
+
+                        </div>
+                        <div style=" float: right;">
+                            <!-- <span class="add-panel" (click)="addVacation()"><i class="fas fa-plus-circle"></i> add</span>
+                            <span class="sm-verticle-bar"></span> -->
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="loader">
+            <div class="col-md-12">
+                <div *ngIf="HideClick" class="col-md-5 col-sm-5" style="text-align:right" id="btndatesbuttons">
+                    <div class="buttonsicon" style="display: block;">
+                        <a id="prevbtn" href="javascript:void(0);" (click)="prev()" title="Previous"><i
+                                class="fa fa-caret-left" aria-hidden="true"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label id="lbldates">{{FirstDay | date:'d MMM y'}} - {{endDate |
+                            date: 'd MMM y'}}</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a id="nextbtn" href="javascript:void(0);" (click)="next()" title="Next"><i
+                                class="fa fa-caret-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-7 icons" style="float: right;">
+                    <div>
+                        <span style="float:left; color: #fff;" id="viewrequest">view</span>
+                        <div class="calendericon" id="req">
+                            <a id="request" title="Request" (click)="requests()">Requests</a>
+                        </div> <span style="float:left;margin-left: 10px; font-size: 20px; color: #fff;">|</span>
+                        <div class="calendericon" id="allvacations">
+                            <a id="all" title="All" (click)="All()">All</a>
+                        </div>
+                        <div class="calendericon" id="calendardate">
+                            <!-- <a><i class="fa fa-calendar" [(ngModel)]="model" (ngModelChange)="changeDate($event)" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" id="datepicker"
+                                    aria-hidden="true"></i></a> -->
+
+                            <input hidden class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model"
+                                (ngModelChange)="changeDate($event)" ngbDatepicker #d="ngbDatepicker">
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()"
+                                type="button"></button>
+
+                        </div>
+                        <div class="calendericon" id="todayicon">
+                            <div id="today" title="Today" (click)="PresentDay()">today</div>
+                        </div>
+                        <div class="calendericon" id="Monthlyicon">
+                            <div id="month" title="Month" (click)="Month()">Month<i style="margin-left:3px;"
+                                    class="fa fa-eye" aria-hidden="true"></i></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align:center">
+                <label style="padding: 3px 24px 2px 24px; font-weight: bold; margin-bottom: 0;"
+                    id="lblalertmessage"></label>
+            </div>
+        </div>
+        <div *ngIf="ShowCalendar">
+            <div id="divcalgridpnl" class="col-md-12" *ngIf="loader" style="background: rgba(0,0,0,0.5);">
+                <div class="calendartable mCustomScrollbar _mCS_1" style="width: 100%;">
+                    <div id="mCSB_1" class="mCustomScrollBox mCS-rounded-dark mCSB_vertical_horizontal mCSB_inside"
+                        style="max-height: none;" tabindex="0">
+                        <div id="mCSB_1_container_wrapper"
+                            class="mCSB_container_wrapper mCS_x_hidden mCS_no_scrollbar_x">
+                            <div id="mCSB_1_container" class="col-md-12"
+                                style="position: relative; top: 0px; left: 0px; width: 100%; background: rgba(0,0,0,0.5);"
+                                dir="ltr">
+                                <div>
+                                    <table id="tblcalendar" class="table" border="0">
+                                        <thead class="table-scroll">
+                                            <tr>
+                                                <th></th>
+                                                <td class="greenclr" *ngFor="let d of days" [ngClass]="{Holiday: d.design == 'holiday',Normalday: d.design == 'Empty',weekends: d.design == 'weekend',Currentday: d.design == 'currentday'   
+                                    }">
+                                                    <span>{{d.day | slice:0:1}}<br></span>
+                                                    <span>{{d.day | date:'MMMM' | slice:0:3}}</span>
+                                                </td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="scroll" *ngIf="Users">
+                                            <tr *ngFor="let det of details">
+                                                <td class="usrs">{{det.U_NAME}}</td>
+                                                <td *ngFor="let d of days" [ngClass]="{Holiday: d.design == 'holiday',Normalday: d.design == 'Empty',weekends: d.design == 'weekend',Currentday: d.design == 'currentday'   
+                                            }">
+                                                    <span *ngIf="d.Title == ''" placement="bottom"
+                                                        ngbTooltip="{{d.Title}}">{{d.day | date:'dd'}}</span>
+                                                    <span *ngIf="d.Title != ''" placement="bottom"
+                                                        ngbTooltip="{{d.Title}}">{{d.day | date:'dd'}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody class="scroll" *ngIf="User">
+                                            <tr *ngFor="let det of request_BE">
+                                                <td style="width: 33%;" class="usrs">{{det.U_NAME}}</td>
+                                                <td *ngFor="let d of days" [ngClass]="{Holiday: d.design == 'holiday',Normalday: d.design == 'Empty',weekends: d.design == 'weekend',Currentday: d.design == 'currentday' ,Approved: d.design == 'approved',Pending: d.design == 'pending', Rejected: d.design == 'rejected', 
+                                                                                      Permission: d.design == 'permission', WFHYD: d.design == 'wfhyd', WFREMOTE: d.design == 'wfremote',WFRJY: d.design == 'wfrjy'
+                                            }">
+                                                    <span *ngIf="d.Title == ''" placement="bottom"
+                                                        ngbTooltip="{{d.Title}}">{{d.day | date:'dd'}}</span>
+                                                    <span *ngIf="d.Title != ''" placement="bottom"
+                                                        ngbTooltip="{{d.Title}}">{{d.day | date:'dd'}}</span>
+                                                    <span *ngIf="d.leave == 'true'"></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="mCSB_1_scrollbar_horizontal"
+                            class="mCSB_scrollTools mCSB_1_scrollbar mCS-rounded-dark mCSB_scrollTools_horizontal"
+                            style="display: none;">
+                            <div class="mCSB_draggerContainer">
+                                <div id="mCSB_1_dragger_horizontal" class="mCSB_dragger"
+                                    style="position: absolute; min-width: 14px; display: block; left: 0px;">
+                                    <div class="mCSB_dragger_bar"></div>
+                                </div>
+                                <div class="mCSB_draggerRail"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" id="holidaylistcolors">
+                    <div style="float:left; width:160px;">
+                        <div class="colordivs" style="background-color:#380038;"></div><span
+                            style="margin-left:8px;">Company
+                            Holiday</span>
+                    </div>
+                    <div style="float:left; width:100px;">
+                        <div class="colordivs" style="background-color:#004450;"></div><span
+                            style="margin-left:8px;">Today</span>
+                    </div>
+                    <div style="float:left; width:180px;">
+                        <div class="colordivs" style="background-color:dimgray;"></div><span
+                            style="margin-left:8px;">Saturday
+                            &amp; Sunday</span>
+                    </div>
+                    <div style="float:left; width:110px;">
+                        <div class="colordivs" style="background-color:#7fbb00;"></div><span
+                            style="margin-left:8px;">Approved</span>
+                    </div>
+                    <div style="float:left; width:110px;">
+                        <div class="colordivs" style="background-color:#F8BF66;"></div><span
+                            style="margin-left:8px;">Pending</span>
+                    </div>
+                    <div style="float:left; width:110px;">
+                        <div class="colordivs" style="background-color:#FF0000;"></div><span
+                            style="margin-left:8px;">Rejected</span>
+                    </div>
+                    <div style="float:left; width:110px;">
+                        <div class="colordivs" style="background-color:#00c2e0;"></div><span
+                            style="margin-left:8px;">Cancelled</span>
+                    </div>
+                    <div style="float:left; width:110px;">
+                        <div class="colordivs" style="background-color:#84754e;"></div><span
+                            style="margin-left:8px;">Permission</span>
+                    </div>
+                    <div style="float:left; width:200px;">
+                        <div class="colordivs" style="background-color:rgba(74, 21, 198, 1);"></div><span
+                            style="margin-left:8px;">Work From Hyderabad</span>
+                    </div>
+                    <div style="float:left; width:200px;">
+                        <div class="colordivs" style="background-color:#d20962;"></div><span
+                            style="margin-left:8px;">Work From
+                            Remote</span>
+                    </div>
+                    <div style="float:left; width:200px;">
+                        <div class="colordivs" style="background-color:#212a3e;"></div><span
+                            style="margin-left:8px;">Work From
+                            Rajahmundry</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card123" *ngIf="ShowMonth">
+        <div class="container">
+            <div class="main-container">
+                <div class="container1">
+                    <div id="calendarmonthlydiv" style="display: block;">
+                        <div class="col-md-12">
+                            <div id="buttons" class="col-md-12 col-xs-12" style="padding-bottom:10px;">
+                                <div class="row pb-4 pt-4">
+                                    <div class="col-md-12 col-lg-12 col-sm-12 ">
+                                        <div class="col-md-4 col-xs-12">
+                                            <button (click)="pre(startYear)" [disabled]="predisable"
+                                                class="btn btn-info">prev</button>
+                                        </div>
+
+                                        <div class=" col-md-2 col-sm-4 col-xs-12">
+                                            <div class="form-group">
+                                                <select class="form-select" [(ngModel)]="selectedmonth"
+                                                    (change)="getdate($event.target.value,'m',startYear,endYear)">
+                                                    <option *ngFor="let month of months" value="{{month.id}}">
+                                                        {{month.name}}
+                                                    </option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-2 col-sm-4 col-xs-12">
+                                            <div class="form-group">
+                                                <select class="form-select"
+                                                    (change)="getdate($event.target.value,'y',startYear,endYear)"
+                                                    [(ngModel)]="selectedyear">
+                                                    <option *ngFor="let yr of result" [value]="yr.index">{{yr.year}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12 text-end">
+                                            <button (click)="nxt(endYear)" [disabled]="isdisable"
+                                                class="btn btn-info">next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <table class="c-table">
+                                            <thead class="c-thead text-center">
+                                                <tr class="c-trow">
+                                                    <th style="width: 14.285%;">Sunday</th>
+                                                    <th style="width: 14.285%;">Monday</th>
+                                                    <th style="width: 14.285%;">Tuesday</th>
+                                                    <th style="width: 14.285%;">Wednesday</th>
+                                                    <th style="width: 14.285%;">Thursday</th>
+                                                    <th style="width: 14.285%;">Friday</th>
+                                                    <th style="width: 14.285%;">Saturday</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="c-tbody">
+                                                <tr style="height: 80px;">
+                                                    <td *ngFor="let w of weekdays.slice(0, index)"></td>
+                                                    <td *ngFor="let d of dayz.slice(0, 7 - index)"> {{ d.date | date:
+                                                        'dd' }}</td>
+                                                </tr>
+                                                <tr style="height: 80px;">
+                                                    <td *ngFor="let d of dayz.slice(7-index, 7-index+7)">{{ d.date |
+                                                        date: 'dd' }}
+                                                        <br> <span style="color: goldenrod;">{{d.name}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 80px;">
+                                                    <td *ngFor="let d of dayz.slice(7-index+7, 7-index+14)">{{ d.date |
+                                                        date: 'dd'}}
+                                                        <br> <span style="color: goldenrod;">{{d.name}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 80px;">
+                                                    <td *ngFor="let d of dayz.slice(7-index+14, 7-index+21)">{{ d.date |
+                                                        date: 'dd'}}
+                                                        <br> <span style="color: goldenrod;">{{d.name}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 80px;">
+                                                    <td *ngFor="let d of dayz.slice(7-index+21,7-index+28)">{{ d.date |
+                                                        date: 'dd'}}
+                                                        <br> <span style="color: goldenrod;">{{d.name}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr style="height: 80px;">
+                                                    <td *ngFor="let d of dayz.slice(7-index+28)">{{ d.date | date: 'dd'
+                                                        }} <br>
+                                                        <span style="color: goldenrod;">{{d.name}}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

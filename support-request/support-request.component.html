@@ -1,0 +1,226 @@
+<app-header></app-header>
+<div class="container ">
+    <div class="row row-db" *ngIf="showGridDetails">
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    <span style=" float: left;">SUPPORT REQUEST</span>
+                    <div style=" float: right;">
+                      <span class="add-panel" (click)="AddPanel()"><i class="fas fa-plus-circle"></i> add</span>
+                      <span class="sm-verticle-bar"></span>
+                      <a href="dashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                      <span class="sm-verticle-bar"></span>
+                      <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                      <span class="sm-verticle-bar"></span>
+                      <span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-inverse" *ngIf="showGridDetails">
+      <div class="head-bg">
+          <div class="navbar-header ">
+              <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                  style="float: right;">
+                  <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+              </a>
+              <span class="navbar-brand" href="#">SUPPORT REQUEST</span>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                  <li class="pt-3"><span (click)="AddPanel()"><i class="fas fa-plus-circle"></i> add</span></li>
+                  <li class="pt-3"><a href="dashboard"
+                          style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+                  <li class="pt-3 pb-2"><a href="#" style="text-decoration: none; color: #ffffff;">project
+                          dashboard</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <nav class="navbar navbar-inverse" *ngIf="showAddPanel" >
+      <div class="head-bg">
+        <div class="navbar-header ">
+          <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float: right;">
+              <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+          </a>
+          <span class="navbar-brand" >SUPPORT REQUEST (add)</span>
+          <!-- <span class="navbar-brand" *ngIf="save2">LOCATIONS (edit)</span> -->
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="pt-3"><span (click)="viewall()">view all</span></li>
+            <li class="pt-3"><a href="dashboard" style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+            <li class="pt-3 pb-2"><a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="row row-db" *ngIf="showAddPanel">
+      <div class="col-md-12">
+          <div class="head-bg">
+              <div class="head-bg-left">
+                  <span style=" float: left;" >SUPPORT REQUEST (add)</span>
+                  <!-- <span style=" float: left;" *ngIf="save2">LOCATIONS (edit)</span> -->
+                  <div style=" float: right;">
+                      <span (click)="viewall()" class="add-panel"> view all</span>
+                      <span class="sm-verticle-bar"></span>
+                      <a href="dashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                      <span class="sm-verticle-bar"></span>
+                      <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+   </div>
+
+<div class="main-container" *ngIf="showGridDetails">
+    <div class="col-md-12 pt-3 buttons" >
+         <div class="col-xs-12 text-center"  *ngFor="let count of SR_Count" >
+           <button id="newreqref" type="button" id="btn" class="btn  ms-1 countbgcolor" title="view SupportRequest(new request)" (click)="EventClick(SupportRequestById[5])" >New Request: <span class="badge" ><span id="newreqcount" class="count" >{{count.NewRequest}}</span></span></button>
+           <button id="openref" type="button" id="btn" class="btn  ms-1 countbgcolor"  title="view SupportRequest(open)" (click)="EventClick(SupportRequestById[0])">Open: <span class="badge" ><span id="opencount" class="count" >{{count.Open}}</span></span></button>
+           <button id="needref" type="button" id="btn" class="btn  ms-1 countbgcolor"  title="view SupportRequest(need clarification)" (click)="EventClick(SupportRequestById[3])" >Need Clarification: <span class="badge" ><span id="needcount" class="count" >{{count.NeedClarification}}</span></span></button>
+           <button id="resolvedref" type="button" id="btn" class="btn  ms-1 countbgcolor"  title="view SupportRequest(resolved)" (click)="EventClick(SupportRequestById[1])">Resolved: <span class="badge" ><span id="resolvedcount" class="count" >{{count.Resolved}}</span></span></button>
+           <button id="closedref" type="button" id="btn" class="btn  ms-1 countbgcolor"  title="view SupportRequest(closed)" (click)="EventClick(SupportRequestById[2])">Closed: <span class="badge" ><span id="closedcount" class="count" >{{count.Closed}}</span></span></button>                                    
+           <button id="reopenref" type="button" id="btn" class="btn  ms-1 mx-1 countbgcolor"  title="view SupportRequest(re-open)" (click)="EventClick(SupportRequestById[4])">Re-open: <span class="badge" ><span id="reopencount" class="count">{{count.ReOpen}}</span></span></button>
+         </div>
+    </div>
+    <div class="col-md-12 ms-4 pt-3 dropdowntype" style="display: none;" >
+      <span id="qabugcountname" style="float: left; margin-top: 15px">View: </span>
+      <div id="qabugcountid" style="float: left; margin-left: 5px;" *ngFor="let count of SR_Count">                                    
+          <select id="bugscount" style="margin-top: 10px" class="form-control" tabindex="1" (change)="onChange($event.target.value)">
+            <option value="0">All</option>
+            <option  value="6">New Request ({{count.NewRequest}})</option>
+            <option  value="1">Open ({{count.Open}})</option>
+            <option  value="4">Need Clarification ({{count.NeedClarification}})</option>
+            <option  value="2">Resolved ({{count.Resolved}})</option>
+            <option  value="3">Closed ({{count.Closed}})</option>
+            <option  value="5">Re-Open ({{count.ReOpen}})</option>
+          </select>
+      </div>
+   </div>
+    <div class="container mt-4 pt64" >
+        <div class="row" *ngIf="showGrid">
+          <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12"> 
+            <div class="text-center"></div>  
+            <div class="table-scroll wrapper">
+              <table class="flex-table flex-table-aligned table table-striped table-hover">
+                  <thead>
+                    <tr class="thead-row">
+                      <th  style="width: 25% !important;">Subject</th>
+                      <th style="width: 13% !important;">From</th>
+                      <th style="width: 13% !important;">To</th>
+                      <th style="width: 15%;" >Request Type</th>
+                      <th style="width: 14%;">Request Status</th>
+                      <th style="width: 10% !important;">Date</th>
+                      <th style="width: 10% !important;">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="scroll" >
+                    <tr *ngFor="let SR of requestData">
+                        <td style="width: 25% !important;">{{SR.RD_TITLE}}</td>
+                        <td style="width: 13% !important;">{{SR.RequestFrom}}</td>
+                        <td style="width: 13% !important;">{{SR.AssignedTo}}</td>
+                        <td style="width: 15% !important;">{{SR.RequestType}}</td>
+                        <td style="width: 14% !important;">{{SR.RequestStatus}}</td>
+                        <td style="width: 10% !important;">{{SR.RD_TS |date: 'MM/dd/yyyy'}}</td>
+                        <td style="width: 10% !important;">
+                            <a><img title="Delete" class="mx-1 actions" style="height: 18px;" src="../../../assets/Images/del_gry.png"></a>
+                            <a><img title="Show" class="show-panel ms-2 actions" src="../../../assets/Images/view_icon.png"></a>
+                        </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+         </div> 
+         <div class="row" *ngIf="showError">
+          <div class="col-md-12 ">
+              <div class="form-group" style="text-align: center">
+                  <label for="lblstatusdisplay" class="alert alert-danger" >{{result}}</label>
+                  <label for="lblreccount" class="control-label" ></label>
+              </div>
+          </div>
+      </div> 
+       </div>
+</div>
+
+<div class="container-fluid " *ngIf="showAddPanel" style="display: block;">
+  <div class="col-lg-8 ms-3 mx-3 form-content" >
+      <div class="row ">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">Send Request To*</label>
+               <select class="form-select" aria-label="Default select example" formControlName="type"
+                  name="type"  (change)="onSelect($event.target.value)">
+                  <option value="0">*Select Send Request To</option>
+                  <option *ngFor="let SRT of SupportRequestsType" value="{{SRT.SRT_ID}}">{{SRT.SRT_NAME}}</option>
+               </select>
+            </div>             
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">Request Type*</label>
+               <select class="form-select" aria-label="Default select example" formControlName="type"
+                  name="type" (change)="getDataId($event.target.value)">
+                  <option >*Select Request Type</option>
+                  <option *ngFor="let SRT_SRT of RequestSRT" value="{{SRT_SRT.SRT_SRT_ID}}">{{SRT_SRT.SRT_NAME}}</option>
+               </select>
+            </div>           
+          </div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-lg-12">
+              <div class="form-group">
+                  <label for="exampleInputEmail1" class="mb-2">Subject*</label>
+                  <input type="text" class="form-control" id="LocationNameEmail1" placeholder="*Subject">
+              </div>              
+          </div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-lg-12">
+              <div class="form-group">
+                  <label for="LoacationDescription" class="mb-2">Description</label>
+                  <textarea class="form-control textarea" style="min-height: 150px;" id="LoacationDescription" rows="3" placeholder="Description"></textarea>
+                </div>            
+          </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="mb-2">Request Status</label>
+             <select class="form-select" aria-label="Default select example" formControlName="type"
+                name="type"  >
+                <option *ngFor="let RS of RequestStatusData"  value="{{RS.RS_ID}}">{{RS.RS_NAME}}</option>
+             </select>
+           </div>            
+        </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-6">
+          <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2">CC To</label>
+              <input type="text" class="form-control" id="LocationNameEmail1" placeholder="CC To">
+          </div>              
+        </div>
+     </div>
+     <div class="row mt-3">
+       <div class="col-lg-7">
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="mb-2">TAGS</label>
+            <input type="text" class="form-control" id="LocationNameEmail1" placeholder="Tags">
+          </div>              
+       </div>
+    </div>
+      <div class="row mt-3">
+          <div class="col-lg-4">
+                  <button class="btn btn-info ">Save</button>
+                  <button class="btn btn-warning ms-2" (click)="Cancel()">Cancel</button>  
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-4"></div>
+</div>

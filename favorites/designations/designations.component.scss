@@ -1,0 +1,104 @@
+.container {
+    position: relative;
+    top: 6rem;
+}
+
+.btn-info ,.btn-warning {
+    color: #fff;
+    padding: 7px 20px 7px 20px;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    // text-transform: uppercase;
+    position: relative;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    font-weight: bold;
+    border-radius: 3px;
+    
+    }
+
+.head-bg {    
+    background: linear-gradient(to right, rgba(255,255,255,0.04) 0%, rgba(10,160,194,1) 100%);
+    // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#0aa0c2', GradientType=1 );
+    color: #fff;
+    min-height: 0 !important;
+    margin-bottom: 20px;
+    width: 100%;
+    float: left;
+    font-size: 16px;
+    padding: 10px 20px !important;
+    border: none !important;
+}
+* {    
+    box-sizing: border-box;
+}
+
+.desig {
+    color: #fff;
+}
+
+.bg-dark {
+    background: linear-gradient(to right, rgba(255,255,255,0.04) 0%, #3a618a 100%)
+}
+
+.mods {
+   color: #3a618a; 
+   font-weight: 600;
+}
+
+label {
+    color: white;
+}
+
+.form-control {
+    height: 32px;
+}
+.backgr {
+    background: linear-gradient(45deg, black, transparent);
+}
+.container-fluid {
+    width: 95% !important;
+    height: 450px;
+    overflow: auto;
+}
+
+.scroll{
+    height: 150px;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 3px;
+
+  }
+  /* Track */
+
+  ::-webkit-scrollbar-track {
+
+    background: #f1f1f1;
+
+  }
+  /* Handle */
+
+  ::-webkit-scrollbar-thumb {
+    background-image: -webkit-gradient(linear,
+
+                                       left bottom,
+
+                                       left top,
+
+                                       color-stop(0.44, rgb(122,153,217)),
+
+                                       color-stop(0.72, rgb(73,125,189)),
+
+                                       color-stop(0.86, rgb(28,58,148)));                                
+
+}
+  /* Handle on hover */
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a618a;
+  }
+

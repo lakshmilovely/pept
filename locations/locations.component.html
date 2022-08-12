@@ -1,0 +1,243 @@
+<app-header></app-header>
+<div class="card123">
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+    <div class="container ">
+
+        <div class="row row-db" *ngIf="showGrid">
+            <div class="col-md-12">
+                <div class="head-bg">
+                    <div class="head-bg-left">
+                        <span style=" float: left;">LOCATIONS</span>
+
+                        <div style=" float: right;">
+                            <span (click)="AddPanel()" class="add-panel"><i class="fas fa-plus-circle"></i> add</span>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="dashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-inverse" *ngIf="showGrid">
+            <div class="head-bg">
+                <div class="navbar-header ">
+                    <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                        style="float: right;">
+                        <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+                    </a>
+                    <span class="navbar-brand" href="#">LOCATIONS</span>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="pt-3"><span (click)="AddPanel()"><i class="fas fa-plus-circle"></i> add</span></li>
+                        <li class="pt-3"><a href="dashboard"
+                                style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+                        <li class="pt-3 pb-2"><a href="#" style="text-decoration: none; color: #ffffff;">project
+                                dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-inverse" *ngIf="showAddPanel">
+            <div class="head-bg">
+                <div class="navbar-header ">
+                    <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                        style="float: right;">
+                        <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+                    </a>
+                    <span class="navbar-brand" *ngIf="save1">LOCATIONS (Add)</span>
+                    <span class="navbar-brand" *ngIf="save2">LOCATIONS (Edit)</span>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="pt-3"><span (click)="viewall()">view all</span></li>
+                        <li class="pt-3"><a href="userdashboard"
+                                style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+                        <li class="pt-3 pb-2"><a href="userdashboard"
+                                style="text-decoration: none; color: #ffffff;">project
+                                dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="row row-db" *ngIf="showAddPanel">
+            <div class="col-md-12">
+                <div class="head-bg">
+                    <div class="head-bg-left">
+                        <span style=" float: left;" *ngIf="save1">LOCATIONS (Add)</span>
+                        <span style=" float: left;" *ngIf="save2">LOCATIONS (Edit)</span>
+                        <div style=" float: right;">
+                            <span (click)="viewall()" class="add-panel"> view all</span>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container" *ngIf="showGrid">
+            <div class="container pt64 ">
+                <div class="row ">
+                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 mt-5">
+                        <div class="table-scroll">
+                            <table class="flex-table flex-table-aligned table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 35%;">Location Name</th>
+                                        <th style="width: 25%;">Status</th>
+                                        <th style="width: 20%;">Date</th>
+                                        <th style="width: 10%;">Edit</th>
+                                        <th style="width: 10%;">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="scroll">
+                                    <tr *ngFor="let location of locationsData">
+                                        <td style="width: 35%;">{{location.LOC_NAME}}</td>
+                                        <td [ngClass]="location.LOC_ACTIVE=='Y'?'ACTIVE':'INACTIVE'"
+                                            style="width: 25%;">
+                                            {{location.LOC_ACTIVE=='Y'?'Active':'Inactive'}}
+                                        </td>
+                                        <td style="width: 20%;">{{location.LOC_TS |date: 'M/dd/yyyy'}}</td>
+                                        <td style="width: 10%;">
+                                            <a><img title="Edit" class="actions" (click)="EditPanel(location)"
+                                                    src="../../../assets/Images/edt_icon.png"></a>
+                                        </td>
+                                        <td style="width: 10%;">
+                                            <a><img title="Delete" class="actions" (click)="delete(location)"
+                                                    src="../../../assets/Images/del_gry.png"></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- addfunction -->
+        <div class="container-fluid" *ngIf="showAddPanel" style="display: block;">
+            <form [formGroup]="layform">
+                <div class="col-lg-12 form-content">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Location Name</label>
+                                <input type="text" formControlName="LocationName" class="form-control"
+                                    placeholder="Location Name"
+                                    [ngClass]="{ 'is-invalid': submitted && f.LocationName.errors }">
+                                <div *ngIf="submitted && f.LocationName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.LocationName.errors.required">Location Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Address Line1</label>
+                                <input type="text" formControlName="addressline1" class="form-control"
+                                    placeholder="Address Line1"
+                                    [ngClass]="{ 'is-invalid': submitted && f.addressline1.errors }">
+                                <div *ngIf="submitted && f.addressline1.errors" class="invalid-feedback">
+                                    <div *ngIf="f.addressline1.errors.required">Address Line1 is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Address Line2</label>
+                                <input type="text" formControlName="addressline2" class="form-control"
+                                    placeholder="Address Line2">
+                                <!-- <div *ngIf="submitted && f.addressline2.errors" class="invalid-feedback">
+                                    <div *ngIf="f.addressline2.errors.required">Address Line2 is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Address Line3</label>
+                                <input type="text" formControlName="addressline3" class="form-control"
+                                    placeholder="Address Line3">
+                                <!-- <div *ngIf="submitted && f.addressline3.errors" class="invalid-feedback">
+                                    <div *ngIf="f.addressline3.errors.required">Address Line3 is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Address Line4</label>
+                                <input type="text" formControlName="addressline4" class="form-control"
+                                    placeholder="Address Line4">
+                                <!-- <div *ngIf="submitted && f.addressline4.errors" class="invalid-feedback">
+                                    <div *ngIf="f.addressline4.errors.required">Address Line4 is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Address Line5</label>
+                                <input type="text" formControlName="addressline5" class="form-control"
+                                    placeholder="Address Line5">
+                                <!-- <div *ngIf="submitted && f.addressline5.errors" class="invalid-feedback">
+                                    <div *ngIf="f.addressline5.errors.required">Address Line5 is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="LocationDescription" class="mb-2">Location Description</label>
+                                <textarea class="form-control textarea" formControlName="Locationdes" rows="3"
+                                    placeholder="Location Description"></textarea>
+                                <!-- <div *ngIf="submitted && f.Locationdes.errors" class="invalid-feedback">
+                                    <div *ngIf="f.Locationdes.errors.required">Location description is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3">
+
+                        <div class="col-6" *ngIf="hideall">
+
+                            <label style="margin: 4px;float: left;font-size: 20px;" for="LOC_ACTIVE">
+
+                                <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"
+                                    (change)="status($event.target.checked)" name="LOC_ACTIVE"
+                                    formControlName="LOC_ACTIVE">&nbsp;
+
+                                <label *ngIf="isactive" style="color: green;cursor: pointer;" value="Y"
+                                    name="LOC_ACTIVE" for="LOC_ACTIVE">Active</label>
+
+                                <label *ngIf="isinactive" style="color: red;cursor: pointer;" for="LOC_ACTIVE" value="D"
+                                    name="LOC_ACTIVE">In-Active</label>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-4 ">
+                            <button class="btn btn-info" type="submit" (click)="insert()" *ngIf="save1">Save</button>
+                            <button class="btn btn-info" type="submit" (click)="saveedit()" *ngIf="save2">Save</button>
+                            <button class="btn btn-warning ms-2" (click)="Cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

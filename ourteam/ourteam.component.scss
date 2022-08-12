@@ -1,0 +1,343 @@
+.image123{
+  height: 93px;
+    width: 93px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    position: relative;
+    top: -7px;
+    left: -7px;
+}
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+    
+    .dashBOARD{     
+      background:linear-gradient(to right,rgba(255,255,255,0.04)0%,rgba(10,160,194,1)100%) !important;
+        height: 34px;
+      margin-top: 6px;
+    }
+    body {
+      background: #eee
+  }
+  
+  .ratings i {
+      color: green
+  }
+  
+  .install span {
+      font-size: 12px
+  }
+  .name{
+    font-weight:500 !important;
+    color: whitesmoke;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  }
+  .card-img-top {
+    width: 30%;
+    height: inherit;
+  }
+  .float {
+    float: right;
+  }
+  .designation{
+    font-weight: 300 !important;
+    color: whitesmoke;  
+    font-size: 12px !important;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .scroll{
+  height: 60vh;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+  padding: 2px 0 2px 0;
+  
+  ::-webkit-scrollbar{width:3px ;}
+  /* Track */::-webkit-scrollbar-track{ background:#555; }
+  /* Handle */::-webkit-scrollbar-thumb{background-image:-webkit-gradient(linear,left bottom,left top,
+    color-stop(0.12,rgb(122,153,217)),color-stop(0.22,rgb(73,125,189)),color-stop(0.50,rgb(28,58,148)));}
+  /* Handle on hover */::-webkit-scrollbar-thumb:hover{background:#555;
+  
+  }
+      
+  }
+  .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: -26px !important;
+   
+}
+
+
+.sm-verticle-bar{border-left: 1px solid #fff;margin: 0 8px!important;}
+
+
+  .col-md-4 {
+      margin-top: 16px
+      
+  }
+  .teamgrid {
+    height: 500px !important;
+    overflow-y: overlay !important;
+    overflow-x: hidden !important;
+    width: 95%;
+    margin-top: 2rem !important;
+    padding-right: 2rem !important;
+   
+  }
+  .indianoffice{
+    display: flex;
+    color: whitesmoke; 
+    font-weight: 400;   
+    font-size: 14px;
+   }
+.navbar-brand{
+  display: flex;
+  color: whitesmoke;
+  font-size: 26px;
+  font-weight: 400;
+}
+.navbar{
+  background: linear-gradient(to right,rgba(255,255,255,0.04)0%,rgba(10,160,194,1)100%) !important;
+}
+
+.online{
+  font-weight: bolder;
+  color: green;
+  font-size: 18px;
+}
+
+  .card {
+    
+    border-start-start-radius: 50px;
+  border-bottom-left-radius: 50px;
+  }
+  .card p-3{
+    border-color: whitesmoke !important;
+    height: 96px !important;
+    background-color: black !important;
+   
+  }
+  .mat-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-form-field-flex {
+    cursor: pointer;
+    background-color: #fff !important;
+  }
+
+  .head-bg {
+    
+    background: linear-gradient(to right, rgba(255,255,255,0.04) 0%, rgba(10,160,194,1) 100%);
+    // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#0aa0c2', GradientType=1 );
+    color: #fff;
+    min-height: 0 !important;
+    margin-bottom: 20px;
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    padding: 10px 20px !important;
+    border: none !important;
+  }
+  * {
+    
+    box-sizing: border-box;
+  }
+  
+ .container {
+   position: relative;
+   top: 6rem;
+ }
+
+
+  //popup
+  .modal-header{
+    background: linear-gradient(to right, rgb(0, 41, 88) 0%, rgba(255,175,75,0) 100%) !important;
+    position: relative;
+  }
+  .card-img-top[_ngcontent-ovg-c81] {
+    width: 20%;
+    height: inherit;
+}
+.btn-danger {
+  color: #fff !important;
+  background-color: darkorange;
+  border-color: darkorange;
+}
+.modal-dialog[_ngcontent-ovg-c81] {
+  margin-top: 120px;
+}
+.modal-dialog {
+  max-width: 700px;
+  margin: 4.75rem auto;
+}
+
+// popup2
+
+.example-spacer1 {
+  flex: 1 1 auto;
+}
+
+.modal-header[_ngcontent-xqn-c81]{
+  height: 65px;
+}
+
+
+.modal-footer {
+  justify-content: center !important;
+}
+
+.modal-content {
+  top: 100px;
+}
+
+.eyeicon {
+  color: aquamarine;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.commenticon {
+  color: tomato;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.cardicon {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-close {
+  position: absolute;
+    right: -7px;
+    top: -9px;
+}
+
+.modal-popup a.close-link {
+  position: absolute;
+  top: 17px;
+  right: 24px;
+  font-size: 14px;
+  color: #000a00;
+  font-weight: bold;
+  border-radius: 50%;
+  z-index: 999;
+  padding: 0px 8px;
+  background: rgba(217, 232, 220, 0.66);
+}
+@media (min-width: 992px){
+.modal-lg, .modal-xl {
+    max-width: 910px !important;
+}
+}
+#addfavoriteslink{
+  background: #ee6123;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: white;
+  text-decoration: none;
+}
+
+.btn {
+  color: #fff;
+  padding: 7px 20px 7px 20px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+  margin-top: 20px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+@media only screen and (min-width : 540px) and (max-width : 1920px) {
+
+  .img-responsive{
+    height: 50px;
+    width: 120px;
+  }
+  .profile-img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  .col-md-3 {
+    width: 30.33333333%;
+  }
+  .col-md-9 {
+    width: 70.66666667%;
+  }
+  img {
+    vertical-align: middle;
+    border: 0;
+  }
+  .modal-popup {
+    position: relative;
+    text-align: left;
+    background: #ffffff;
+    box-shadow: none;
+    border-radius: 2px;
+  }
+  .formcontrols {
+    color: #000;
+    margin-bottom: 8px;
+  }
+  .card-img-top{
+    width: 100% !important;
+    height: inherit;
+  }
+  .control-label{
+    color: #000;
+    font-size: medium;
+    font-weight: 600;
+  }
+}
+
+@media only screen and (min-width : 280px) and (max-width : 720px) {
+  .modal-content{
+    width: 100% !important;
+    top: 40px !important;
+  }
+  .img-responsive{
+    height: 50px;
+    width: 120px;
+  }
+  .profile-img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+.card-img-top{
+  width: 80% !important;
+  height: inherit;
+  height: 260px !important;
+}
+.modal-body{
+  margin: 10px 30px !important;
+}
+.col-md-3{
+  text-align: center;
+}
+.col-md-12 {
+  display: block !important;
+}
+.control-label{
+  color: #000;
+  font-size: medium;
+  font-weight: bold;
+}
+.head-bg{
+  margin-bottom: 10px !important;
+}
+}
+
+
+

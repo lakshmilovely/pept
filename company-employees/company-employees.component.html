@@ -1,0 +1,132 @@
+<app-header></app-header>
+<div class="card123">
+    <app-loader-animation *ngIf="loader"></app-loader-animation>
+    <div class="container ">
+
+        <div class="row row-db" *ngIf="show">
+            <div class="col-md-12">
+                <div class="head-bg">
+                    <div class="head-bg-left">
+                        <span style=" float: left;">COMPANY PROFILES</span>
+                        <div style=" float: right;">
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container pt-5" style="color: #ffffff;" *ngIf="checkbox">
+            <!-- 
+            Company Employees Details :
+            <button data-bs-toggle="modal" class="btn btn-info ms-2" data-bs-target="#myModal526" *ngIf="show"
+                (click)="popup()">View</button> -->
+            <div class="gridemploye ms-4">
+                <!-- <div class="form-check pb-2" *ngFor="let header of selected">
+                    <input class="form-check-input" type="checkbox" 
+                        (change)="onChange(header.title,$event)" #checkboxes id="{{header.title}}"
+                        name="{{header.title}}" />
+                    <label class="form-check-label " for="{{header.title}}">{{header.title}}</label>
+                </div> -->
+                <div class="form-check pb-2" *ngFor="let header of headers">
+                    <input class="form-check-input" [checked]="header.checked == 'true'" type="checkbox"
+                        (change)="onChangeRole(header, $event)" #checkboxes id="{{header.title}}"
+                        name="{{header.id}}" />
+                    <label class="form-check-label " for="{{header.title}}">&nbsp;{{header.title}}</label>
+                </div>
+                <!-- <div style="padding: 0px !important;display: flow-root;" (click)="submit()">
+                    <button class="btn btn-dark">Dashboard</button>
+                    <button *ngIf="submit233" class="btn btn-dark">Dashboard</button>
+                    <button (click)="ExportToExcel()" *ngIf="excel" class="btn btn-primary">Download</button>
+                </div> -->
+
+            </div>
+            <div class="mt-4" style="text-align: center; color: #ffffff; padding: 0px !important;display: flow-root;">
+                <button class="btn btn-info" (click)="submit()">Grid</button>
+            </div>
+        </div>
+
+        <!-- grid -->
+
+        <div class="main-container" *ngIf="grid">
+
+            <div class="container pt64 ">
+
+                <div class="row " id="content">
+
+                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 ">
+                        <div class="table-scroll">
+                            <table class="flex-table flex-table-aligned table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th *ngIf="emp">Employee ID</th>
+                                        <th *ngIf="firstName"> First Name</th>
+                                        <th *ngIf="lastName">Last Name</th>
+                                        <th *ngIf="Email">Email</th>
+                                        <th *ngIf="PERSONAL_EMAIL">Personal Email</th>
+                                        <th *ngIf="PHONE_MOBILE">Mobile Number</th>
+                                        <th *ngIf="date_of_joining">Date Of Joining</th>
+                                        <th *ngIf="date_of_birth">Date Of Birth</th>
+                                        <th *ngIf="FATHER_NAME">Father Name</th>
+                                        <th *ngIf="MOTHER_NAME">Mother Name</th>
+                                        <th *ngIf="CURRENT_ADDRESS">Current Address</th>
+                                        <th *ngIf="CURRENT_CITY">Current City</th>
+                                        <th *ngIf="CURRENT_STATE">Current State</th>
+                                        <th *ngIf="CURRENT_COUNTRY">Current Country</th>
+                                        <th *ngIf="CURRENT_ZIP_CODE">Current Zipcode</th>
+                                        <th *ngIf="PASSPORT">Passport</th>
+                                        <th *ngIf="DRIVING_LICENCE">Driving Licence</th>
+                                        <th *ngIf="VOTER_ID">Voter ID</th>
+                                        <th *ngIf="ADHAAR_NO">Aadhar Number</th>
+                                        <th *ngIf="PF_NUMBER">PF Number</th>
+                                        <th *ngIf="BANK">Bank Name</th>
+                                        <th *ngIf="PANCARD">Pan Card</th>
+                                        <th *ngIf="BANK_ACCOUNT_NUMBER">Bank Accout Number</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="scroll">
+                                    <tr *ngFor="let data of employeeinfo">
+                                        <td *ngIf="emp" class="tdspname">{{data.U_EMP_CODE}}</td>
+                                        <td *ngIf="firstName" class="tdspname">{{data.U_FIRST_NAME}}</td>
+                                        <td *ngIf="lastName" class="tdspname">{{data.U_LAST_NAME}}</td>
+                                        <td *ngIf="Email" class="tdspname">{{data.U_EMAIL}}</td>
+                                        <td *ngIf="PERSONAL_EMAIL" class="tdspname">{{data.U_PERSONAL_EMAIL}}</td>
+                                        <td *ngIf="PHONE_MOBILE" class="tdspname">{{data.U_PHONE_MOBILE}}</td>
+                                        <td *ngIf="date_of_joining" class="tdspname">{{data.U_DOJ |date: 'M/dd/yyyy'}}
+                                        </td>
+                                        <td *ngIf="date_of_birth" class="tdspname">{{data.U_DOB |date: 'M/dd/yyyy'}}
+                                        </td>
+                                        <td *ngIf="FATHER_NAME" class="tdspname">{{data.UD_FATHER_NAME}}</td>
+                                        <td *ngIf="MOTHER_NAME" class="tdspname">{{data.UD_MOTHER_NAME}}</td>
+                                        <td *ngIf="CURRENT_ADDRESS" class="tdspname">{{data.UD_CURRENT_ADDRESS}}</td>
+                                        <td *ngIf="CURRENT_CITY" class="tdspname">{{data.UD_CURRENT_CITY}}</td>
+                                        <td *ngIf="CURRENT_STATE" class="tdspname">{{data.UD_CURRENT_STATE}}</td>
+                                        <td *ngIf="CURRENT_COUNTRY" class="tdspname">{{data.UD_CURRENT_COUNTRY}}</td>
+                                        <td *ngIf="CURRENT_ZIP_CODE" class="tdspname">{{data.UD_CURRENT_ZIP_CODE}}</td>
+                                        <td *ngIf="PANCARD" class="tdspname">{{data.UD_PANCARD}}</td>
+                                        <td *ngIf="PASSPORT" class="tdspname">{{data.UD_PASSPORT}}</td>
+                                        <td *ngIf="DRIVING_LICENCE" class="tdspname">{{data.UD_DRIVING_LICENCE}}</td>
+                                        <td *ngIf="VOTER_ID" class="tdspname">{{data.UD_VOTER_ID}}</td>
+                                        <td *ngIf="ADHAAR_NO" class="tdspname">{{data.UD_ADHAAR_NO}}</td>
+                                        <td *ngIf="PF_NUMBER" class="tdspname">{{data.UD_PF_NUMBER}}</td>
+                                        <td *ngIf="BANK" class="tdspname">{{data.UD_BANK}}</td>
+                                        <td *ngIf="BANK_ACCOUNT_NUMBER" class="tdspname">{{data.UD_BANK_ACCOUNT_NUMBER}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-3" style="text-align: center; color: #ffffff;">
+                <button (click)="ExportToExcel()" *ngIf="excel" class="btn btn-info">Download</button>
+                <button (click)="Cancel()" class="btn btn-warning ms-2">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>

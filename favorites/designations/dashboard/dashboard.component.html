@@ -1,0 +1,525 @@
+<app-header></app-header>
+
+<div class="container ">
+    <div class="row row-db">
+        <div class="col-md-12">
+            <div class="head-bg">
+                <div class="head-bg-left">
+                    <span style=" float: left;">DASHBOARD</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-12 ">
+            <div class="ds-lgbox">
+                <div class="ds-boxhead">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Profile</div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 text-right head-right">
+                            <a style="color:#FFF;">
+                                <span id="editprofile" title="Edit Profile" (click)="editUser(usersData)"
+                                    class="editprofile">edit</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-boxcontent">
+                    <div class="row" id="profilecontent" style="display: block;">
+                        <div style="margin-left: 2%; width: 96%;">
+                            <div class="userprofile" *ngFor="let user of usersData">
+                                <div class="col-md-12 col-sm-12 col-xs-12 mb-2"
+                                    style="text-align: center; margin-top: 5px;">{{user.U_NAME}}</div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 mb-2 divprofileimage"><img
+                                        class="dashboardimg-profile" src="{{image}}/{{user.U_PROFILE_IMAGE}}"
+                                        class="profimg" onerror="this.src='../../../assets/Images/profile-img.png'">
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-top: 5px;">
+                                    {{user.U_DESIGNATION_NAME}}</div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-top: 5px;">
+                                    {{user.U_EMP_CODE}}</div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-top: 5px;">
+                                    {{user.U_DEPARTMENT_NAME}}</div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-top: 5px;">
+                                    <span style="color: #4cb6e6;">Date of Join : </span> {{user.U_DOJ | date:'MM/yyyy'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4 col-xs-12 ">
+            <div class="ds-lgbox">
+                <div class="ds-boxhead">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">My Projects</div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 text-right head-right">
+                            <span><a style="color:#FFF;" href="#" data-toggle="modal"
+                                    data-target="#setdefaultproj">change current project</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-boxcontent">
+                    <div class="row" id="projectcontent" style="display: block;">
+                        <div class="scrolldivprojects mCustomScrollbar _mCS_3 mCS_no_scrollbar" style="height: 225px;">
+                            <div id="mCSB_3" class="mCustomScrollBox mCS-rounded-dark mCSB_vertical mCSB_inside"
+                                style="max-height: none;" tabindex="0">
+                                <div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                    style="position:relative; top:0; left:0;" dir="ltr">
+                                    <div class="projects" style="margin-left: 2%; width: 97%;"></div>
+                                </div>
+                                <div id="mCSB_3_scrollbar_vertical"
+                                    class="mCSB_scrollTools mCSB_3_scrollbar mCS-rounded-dark mCSB_scrollTools_vertical"
+                                    style="display: none;">
+                                    <div class="mCSB_draggerContainer">
+                                        <div id="mCSB_3_dragger_vertical" class="mCSB_dragger"
+                                            style="position: absolute; min-height: 14px; top: 0px;">
+                                            <div class="mCSB_dragger_bar"></div>
+                                        </div>
+                                        <div class="mCSB_draggerRail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-5 col-xs-12 ">
+            <div class="ds-lgbox">
+                <div class="ds-boxhead">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Tasks List</div>
+                    </div>
+                </div>
+                <div class="ds-boxcontent">
+                    <!-- <div id="tasksimage" style="margin-top: 15%; margin-left: 40%; display: none;">
+                      <img id="Contentadmin_Image5" src="Images/loading_black.gif">
+                  </div> -->
+                    <div class="row" id="taskscontent" style="display: block;">
+                        <div class="scrolldivTasks mCustomScrollbar _mCS_4 mCS_no_scrollbar" style="height: 225px;">
+                            <div id="mCSB_4" class="mCustomScrollBox mCS-rounded-dark mCSB_vertical mCSB_inside"
+                                style="max-height: none;" tabindex="0">
+                                <div id="mCSB_4_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                    style="position:relative; top:0; left:0;" dir="ltr">
+                                    <div class="tasks">
+                                        <div style="text-align:center;">
+                                            <span style="color:red;">No Tasks</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="mCSB_4_scrollbar_vertical"
+                                    class="mCSB_scrollTools mCSB_4_scrollbar mCS-rounded-dark mCSB_scrollTools_vertical"
+                                    style="display: none;">
+                                    <div class="mCSB_draggerContainer">
+                                        <div id="mCSB_4_dragger_vertical" class="mCSB_dragger"
+                                            style="position: absolute; min-height: 14px; top: 0px;">
+                                            <div class="mCSB_dragger_bar"></div>
+                                        </div>
+                                        <div class="mCSB_draggerRail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-3 col-xs-12">
+            <div id="Eventsholidays">
+                <div class="ds-lgbox">
+                    <div class="ds-boxhead">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4">Hours
+                                <span id="workhourcount"></span>
+                            </div>
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right head-right">
+                                <a title="Today's Work Hours" style="color:#FFF;">
+                                    <span id="todaysworkhours">0 hr</span></a>
+                                <span class="sm-verticle-bar"></span>
+                                <a id="anchprevday" title="No Work Hours Added" style="color:#FFF;">
+                                    <span id="previousdayworkhours">0 hr</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ds-boxhead" style="margin-top:15px;">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4 col-xs-4">QA Info</div>
+                            <div class="col-md-8 col-sm-8 col-xs-8 text-right head-right">
+                                <a id="opentext" style="display: none; color: #FFF;">
+                                    <span id="Qacountspan"></span>
+                                </a>
+                                <a id="QAviewbutton" style="display: inline; color: #FFF;">
+                                    <span>view all</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ds-boxhead" style="margin-top:15px;">
+                        <div class="row">
+                            <div id="HH1" class="col-md-6 col-sm-6 col-xs-6">Holidays</div>
+                            <div id="HDBLOCk" class="col-md-6 col-sm-6 col-xs-6 text-right head-right">
+                                <a (click)="open(mymodal)">
+                                    <span style="color:#FFF; cursor: pointer;">view all</span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ds-boxhead" style="margin-top:15px;">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">Occasions</div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-right head-right" (click)="opencontact('iq')">
+                                <span style="color:#FFF; cursor: pointer;">view all</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ds-boxhead" style="margin-top:15px;">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">SPYHRE Team</div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-right head-right">
+                                <a href="ourteam" style="color:#FFF;">
+                                    <span>view all</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ds-boxhead" style="margin-top:15px;">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-6">Calendar</div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 text-right head-right">
+                                <a href="calendar" style="color:#FFF;">
+                                    <span>view all</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-xs-12">
+            <div id="MagLogbox" class="ds-lgbox">
+                <div class="ds-boxhead">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Messages</div>
+                        <div class="col-md-6 col-sm-6 col-xs-6 text-right head-right">
+                            <span style="color:#FFF;"><i class="fa fa-plus-circle" aria-hidden="true"
+                                    style="margin-right: 3px;"></i>add</span>
+                            <span class="sm-verticle-bar"></span>
+                            <span style="color:#FFF;">view all</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-boxcontent" style="padding: 5px 15px 5px 15px;">
+                    <div class="row" id="messagecontent" style="display: block;">
+                        <div id="MsgScroll" class="scrolldivuser mCustomScrollbar _mCS_1 mCS_no_scrollbar"
+                            style="height: 250px;">
+                            <div id="mCSB_1" class="mCustomScrollBox mCS-rounded-dark mCSB_vertical mCSB_inside"
+                                style="max-height: none;" tabindex="0">
+                                <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+                                    style="position:relative; top:0; left:0;" dir="ltr">
+                                    <div class="messages"></div>
+                                </div>
+                                <div id="mCSB_1_scrollbar_vertical"
+                                    class="mCSB_scrollTools mCSB_1_scrollbar mCS-rounded-dark mCSB_scrollTools_vertical"
+                                    style="display: none;">
+                                    <div class="mCSB_draggerContainer">
+                                        <div id="mCSB_1_dragger_vertical" class="mCSB_dragger"
+                                            style="position: absolute; min-height: 14px; top: 0px;">
+                                            <div class="mCSB_dragger_bar"></div>
+                                        </div>
+                                        <div class="mCSB_draggerRail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xs-12">
+            <div class="ds-lgbox">
+                <div class="ds-boxhead">
+                    <div class="row">
+
+                        <div class="col-md-4 col-sm-4 col-xs-4 ">Favorites</div>
+                        <div class="col-md-8 col-sm-8 col-xs-8 text-right head-right">
+                            <span title="add favorites">
+                                <a style="color:#FFF;" href="#" data-toggle="modal" data-target="#userfavs">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"
+                                        style="margin-right: 3px;"></i>add</a>
+                            </span>
+                            <span class="sm-verticle-bar"></span>
+                            <span id="view" title="View Favorites" style="color:#FFF;">view all</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ds-boxcontent">
+                    <!-- <div id="favouriteimage" style="margin-top: 25%; margin-left: 35%; display: none;">
+                           <img id="Contentadmin_Image4" src="Images/loading_black.gif">
+                       </div> -->
+                    <div class="row" id="favouritecontent" style="display: block;">
+                        <div class="scrolldivuser mCustomScrollbar _mCS_2 mCS_no_scrollbar">
+                            <div id="mCSB_2" class="mCustomScrollBox mCS-rounded-dark mCSB_vertical mCSB_inside"
+                                style="max-height: none;" tabindex="0">
+                                <div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y ms-3"
+                                    style="position:relative; top:0; left:0;" dir="ltr">
+                                    <div id="favorites" style="margin-left: 2%;width:97%;"></div>
+                                    <div *ngFor=" let x  of FavData" class="row">
+                                        <div class="col-lg-8" style="color:#2971b2; font-weight: bold;">
+                                            {{x.FAV_TITLE}}
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <span>
+                                                <a><i class="fa fa-pencil" aria-hidden="true"
+                                                        style="margin-right: 3px;"></i></a>&nbsp;
+                                            </span>
+                                            <span>
+                                                <a><i class="fa fa-close" aria-hidden="true"
+                                                        style="margin-right: 3px;"></i></a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="mCSB_2_scrollbar_vertical"
+                                    class="mCSB_scrollTools mCSB_2_scrollbar mCS-rounded-dark mCSB_scrollTools_vertical"
+                                    style="display: none;">
+                                    <div class="mCSB_draggerContainer">
+                                        <div id="mCSB_2_dragger_vertical" class="mCSB_dragger"
+                                            style="position: absolute; min-height: 14px; top: 0px;">
+                                            <div class="mCSB_dragger_bar"></div>
+                                        </div>
+                                        <div class="mCSB_draggerRail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="favlink" class="col-md-12" style="text-align: right; float: right; display: block;">
+            <div class="mx-3 mb-3">
+                <a href="#" id="addfavoriteslink">
+                    <i class="fa fa-star" aria-hidden="true"></i>&nbsp;add to favorites</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<app-footer></app-footer>
+
+
+<!-- ------Holidays------------ -->
+
+<ng-template #mymodal let-modal>
+    <div id="moddia" class="modal-dialog" style="margin-top: 72px; width: 500px;">
+        <div class="modal-content modal-popup">
+            <p class="close-link" (click)="modal.dismiss('Cross click')" style="cursor: pointer;">x</p>
+            <div class="pop-header table">
+                <div class="table-cell">
+                    <img src="assets/Images/spyhre-logoemail.png" class="img-responsive">
+
+                </div>
+            </div>
+
+            <div class="pop-content row " id="imagediv1" style="height: 525px; display: none;">
+                <div style="text-align: center;">
+                    <img id="Contentadmin_CompanyHoliday_imgloading" src="Images/loading_black.gif"
+                        style="background-color:white;margin-top:200px;">
+                </div>
+            </div>
+
+            <div id="ho" class="pop-content row ">
+                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-3 text-center">
+                            <i class="fa fa-angle-left"></i>
+                        </div>
+                        <div class="col-6 text-center">
+                            {{convertednumber}} &nbsp; Holidays
+                        </div>
+                        <div class="col-3 text-center">
+                            <i class="fa fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div> -->
+                <h2 id="hho">
+                    <div class="btn-left" style="float:left; pointer-events: auto; " title="Previous" appDebounce
+                        (debounceClick)="PreviousYear(convertednumber)" [debounceTime]="1000">
+                        <i class="fa fa-angle-left"></i>
+                    </div>
+                    {{convertednumber}}&nbsp;&nbsp;&nbsp;Holidays <div class="btn-right" style="float:right;"
+                        title="Next" appDebounce (debounceClick)="Nextyear(convertednumber)" [debounceTime]="1000"><i
+                            class="fa fa-angle-right"></i></div>
+                </h2>
+                <div class="col-md-12 col-sm-12 col-xs-12" *ngIf="records">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 " style="margin-top:3px; margin-bottom:10px;">
+                        <div id="hdays">
+                            <div style="border-top:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%;"
+                                *ngIf="this.jan.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of jan"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">January&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.jan.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of feb"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">February&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.feb.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px;" *ngFor="let list of mar">
+                                <span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">March&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.mar.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of apr"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">April&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.apr.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of may"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">May&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.may.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of jun"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">June&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.jun.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of jul"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">July&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.jul.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of aug"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">August&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.aug.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of sep"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">September&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.sep.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of oct"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">October&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.oct.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of nov"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">November&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+                            <div style="border-bottom:  #2971b2 solid 1px; width: 90%; float:left; height:10px; margin-left: 5%"
+                                *ngIf="this.nov.length !=0">
+                                <span style="margin-left:2%; font-size: 15px;">&nbsp;</span>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12" style="font-size:15px; "
+                                *ngFor="let list of dec"><span
+                                    style="color:black; width:30px; margin-left:2%; font-weight: 500;">December&nbsp;{{list.CH_DATE
+                                    | slice:8:10}} - &nbsp;
+                                </span> <span class="ds-boxcontent-title1" style="font-size: 15px;">{{list.CH_TITLE}}
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12 " style="margin-top:3px; margin-bottom:10px;" *ngIf="norecords">
+            <div id="hdays">
+                <div style="text-align: center; color:red; padding-bottom: 15px;">No Holidays found for the Year -
+                    {{convertednumber}} </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

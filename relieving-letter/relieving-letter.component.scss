@@ -1,0 +1,98 @@
+.container {
+    position: relative;
+    top: 6rem;
+  }
+ .pt64{
+   top: 0rem;
+ }  
+ .sm-verticle-bar {
+  border-left: 1px solid #fff;
+  margin: 0 8px;
+}
+.add-panel{
+  text-decoration: none; 
+  color: #ffffff;
+  cursor: pointer;
+}
+.edit-panel{
+  cursor: pointer;
+} 
+
+
+  .head-bg {
+    background: linear-gradient(to right, rgba(255,255,255,0.04) 0%, rgba(10,160,194,1) 100%);
+    color: #fff;
+    min-height: 0 !important;
+    margin-bottom: 20px;
+    width: 100%;
+    float: left;
+    font-size: 18px;
+    padding: 10px 20px !important;
+    border: none !important;
+  }
+
+
+  .main-container{
+    background-color: rgba(0,0,0,0.5);
+    padding-bottom: 30px;
+    
+  }
+  .form-content{
+    padding: 7px 10px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 100%;
+    color: #fff;
+  }
+  .form-control .form-select{
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #c1bdbd;
+    -webkit-box-shadow: inset 0 0px 0px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 0px 0px rgb(0 0 0 / 8%);
+    margin-bottom: 8px;
+    height: 35px;
+    color: #000;
+    outline: none;
+  }
+  .container-fluid{
+    width: 100%;
+    height: calc(100vh-80px);
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+  // overflow: hidden;
+  }
+
+  .btn {
+   color: #fff;
+   padding: 7px 20px 7px 20px;
+   border-radius: 2px;
+   font-size: 12px;
+   font-weight: 900;
+   letter-spacing: 2px;
+   text-transform: uppercase;
+   position: relative;
+   margin-bottom: 15px;
+   margin-top: 15px;
+   font-weight: bold;
+   border-radius: 3px;
+ }
+
+
+ .img-responsive{
+    height: 50px;
+    width: 120px;
+  }
+
+  @media only screen and (min-width : 720px) and (max-width : 1900px) {
+   .modal-dialog{
+     max-width: 1000px !important;
+   }
+   .modal-body{
+     padding-left: 4rem !important;
+     padding-right: 4rem !important;
+   }
+  }
+

@@ -1,0 +1,99 @@
+table {
+  border: 1px solid black;
+  width: 90%;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+.container {
+  position: relative;
+  top: 6rem;
+}
+
+.container-fluid{
+  width: 100%;
+  // height: calc(100vh-80px);
+  height: 75vh;
+  color: black;
+  background: rgba(0,0,0,0.5);
+  overflow: auto;
+}
+
+.container-file {
+  width: 100%;
+  height: 75vh;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+}
+
+.btn-info {
+  color: #fff;
+  padding: 7px 20px 7px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  // text-transform: uppercase;
+  position: relative;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  font-weight: bold;
+  border-radius: 3px;
+  
+  }
+
+.head-bg {
+  background: linear-gradient(to right, rgba(255,255,255,0.04) 0%, rgba(10,160,194,1) 100%);
+  color: #fff;
+  min-height: 0 !important;
+  margin-bottom: 20px;
+  width: 100%;
+  float: left;
+  font-size: 18px;
+  padding: 10px 20px !important;
+  border: none !important;
+}
+
+.sm-verticle-bar {
+  border-left: 1px solid #fff;
+  margin: 0 8px;
+}
+ 
+.main-container{
+  background-color: rgba(0,0,0,0.5);
+  padding-bottom: 30px;
+  
+}
+
+.contentss {
+  width: 100%;
+  height:500px;
+  overflow-x: hidden;
+}
+
+.contentss::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #bdbdc7;
+}
+
+
+.contentss::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 8px;
+  background-color: orange;
+  border-radius: 3px;
+}
+
+.dashboard{
+  border-collapse: collapse;
+  font-size: 12px;
+  color: white;
+  width: 100%;
+  display: table;
+  background: rgba(22,22,22,.9);
+}
+
+.tdspname{color: white; font-size: 16px; font-weight: bold; text-align: center;}

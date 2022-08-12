@@ -1,0 +1,441 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<app-header></app-header>
+<div class="container">
+  <div class="row row-db">
+    <div class="col-md-12">
+      <div class="head-bg">
+        <div class="head-bg-left">
+          <span style=" float: left;">USER (Edit)</span>
+          <div style=" float: right;">
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+            <span class="sm-verticle-bar"></span>
+            <a href="#" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+            <span class="sm-verticle-bar"></span>
+            <!-- <a href="users" style="text-decoration: none; color: #ffffff;">users grid</a>
+                    <span class="sm-verticle-bar"></span> -->
+            <span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-inverse">
+    <div class="head-bg">
+      <div class="navbar-header ">
+        <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float: right;">
+          <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+        </a>
+        <span class="navbar-brand">USERS (Edit)</span>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="pt-3"><a href="users" class="nav-icons">view all</a></li>
+          <li class="pt-3"><a href="dashboard" class="nav-icons">dashboard</a></li>
+          <li class="pt-3 pb-2"><a href="#" class="nav-icons">project dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="card">
+
+    <!-- <div class="container"> -->
+    <div class="formGroup">
+      <form [formGroup]="myform" (ngSubmit)="updatedata()">
+        <div class="row mt-3 m-3">
+          <div class="col-lg-6 col-sm-12">
+            <div class="row">
+              <div class="col-12">
+                <div>
+                  <label style="color: white; ">Employee Code:</label>
+                  <span style="color:gold; margin-left: 8px;">{{info.U_EMP_CODE}}</span>
+                </div>
+
+                <div class="mt-2">
+                  <label style="color:white;"> First Name</label><br>
+                  <input type="text" class="box" placeholder="First Name" formControlName="fname"
+                    [ngClass]="{ 'is-invalid': submitted && f.fname.errors }" />
+                  <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                    <div *ngIf="f.fname.errors.required">First Name is required
+                    </div>
+                    <div *ngIf="myform.controls.fname.errors.pattern">
+                      First Name must be String
+                    </div>
+                    <div *ngIf="f.fname.errors.maxlength">Maximum length exceeded</div>
+                  </div>
+                </div>
+                <div>
+                  <label style="color:white;"> Last Name </label><br><input type="text" class="box"
+                    placeholder="Last Name" formControlName="lname"
+                    [ngClass]="{ 'is-invalid': submitted && f.lname.errors }">
+                  <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lname.errors.required">Last Name is required</div>
+                    <div *ngIf="myform.controls.lname.errors.pattern">
+                      Last Name must be String
+                    </div>
+                    <div *ngIf="f.lname.errors.maxlength">Maximum length exceeded</div>
+                  </div>
+                </div>
+                <div>
+                  <label style="color:white;">Company Email:</label> <span style="color:gold;"
+                    class="ms-2">{{info.U_EMAIL}}</span><br>
+
+                </div>
+                <div style="color:white;">Change Password
+
+                </div>
+                <div>
+                  <label style="color: white;">Personal Email</label><br><input type="text" class="box"
+                    placeholder="Personal Email" formControlName="mail"
+                    [ngClass]="{ 'is-invalid': submitted && f.mail.errors }">
+                  <div *ngIf="submitted && f.mail.errors" class="invalid-feedback">
+                    <div *ngIf="f.mail.errors.required">Personal Email is required</div>
+                    <div *ngIf="f.mail.errors.pattern">Email must be a valid one</div>
+                  </div>
+                </div>
+                <div>
+                  <a><img src="./../../../assets/Images/fb_btn.png"></a>
+                  <!-- <button type="button" class="butn btn-primary">facebook</button> -->
+                </div>
+                <div class="mt-2">
+                  <a><img src="./../../../assets/Images/google_plus.png"></a>
+                  <!-- <button type="button" class="butn btn-danger">Google+</button> -->
+                </div>
+                <div style="color:white" class="mt-2">
+                  Gender:
+                  <label class="radio-inline" style="margin-left:8px;" *ngFor="let g of genderlist">
+                    <input type="radio" [value]="g.value" name="gender" formControlName="gender"
+                      [checked]="g.selected">&nbsp;{{g.text}}
+                  </label>
+                </div>
+                <div style="color: white;">
+                  <label style="color: white; ">Reporting to:</label>
+                  <span style="color:gold;" class="ms-2">{{info.U_REPORTING_TO_NAME}}</span>
+                </div>
+                <div style="color: white;">
+                  <label>Designation:</label>
+                  <span style="color:gold;" class="ms-2">{{info.U_DESIGNATION_NAME}}</span>
+                </div>
+                <div style="color: white;">
+                  <label>Department:</label>
+                  <span style="color:gold;" class="ms-2">{{info.U_DEPARTMENT_NAME}}</span>
+                </div>
+                <div style="color: white;">
+                  <label style="color: white;">Location:</label>
+                  <span style="color:gold;" class="ms-2">{{info.U_LOC_NAME}}</span>
+                </div>
+                <div style="color: white;">
+                  <label style="color: white;">Date of Joining:</label>
+                  <span style="color:gold;" class="ms-2">{{info.U_DOJ}}</span>
+                </div>
+                <div style="color: white;">
+                  <label style="color:white;"> Emergency Phone:</label><br><input type="text" class="box"
+                    placeholder="Emergency Phone" formControlName="Emergency">
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-sm-12">
+            <div class="row">
+              <div class="col-12">
+                <div *ngIf="uploadedFileName ==''">
+                  <img src="{{image}}/{{info.U_PROFILE_IMAGE}}" style="width: 68px;" class="ms-2">
+                </div>
+                <div style="display: contents;" class="image-preview" *ngIf="uploadedFileName !=''">
+                  <img [src]="previewUrl" height="70" width="100" />
+                </div>
+                <div class="mt-2">
+                  <input type="file" style="border-radius: 0.25rem;" id="myFileInput" (change)="fileload($event)" />
+                  <input type="button" class="buton btn-success"
+                    onclick="document.getElementById('myFileInput').click()" value="BROWSE FILE">
+                </div>
+                <div class="mt-3">
+                  <label style="color:white;"> Date Of
+                    Birth</label><br>
+                  <input type="text" class="box" placeholder="Date Of Birth" formControlName="dofb"
+                    [ngClass]="{ 'is-invalid': submitted && f.dofb.errors }">
+                  <div *ngIf="submitted && f.dofb.errors" class="invalid-feedback">
+                    <div *ngIf="f.dofb.errors.required">Date Of Birth is required</div>
+                  </div>
+                </div>
+                <div>
+                  <label style="color:white;"> Phone</label><br><input type="text" class="box" placeholder="Phone"
+                    formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                  <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                    <div *ngIf="f.phone.errors.required">Phone Number is required</div>
+                    <div *ngIf="f.phone.errors.pattern">Phone Number must be a number</div>
+                  </div>
+
+                </div>
+                <div style="color:white;">
+                  <label style="color:white;"> Primary Mobile</label><br><input type="text" class="box"
+                    placeholder="Primary Mobile" formControlName="primarym">
+                </div>
+                <div style="color:white;">
+                  <label style="color:white;"> Alternate Mobile</label><br>
+                  <input type="text" class="box" placeholder="Alternate Mobile" formControlName="Alternate">
+
+                </div>
+                <div>
+                  <label style="color:white;"> Father Name</label><br>
+                  <input type="text" class="box" placeholder="Father Name" formControlName="fathername"
+                    [ngClass]="{ 'is-invalid': submitted && f.fathername.errors }">
+                  <div *ngIf="submitted && f.fathername.errors" class="invalid-feedback">
+                    <div *ngIf="f.fathername.errors.required">Father Name is required</div>
+                    <div *ngIf="myform.controls.fathername.errors.pattern">
+                      Father Name must be String
+                    </div>
+                    <div *ngIf="f.fathername.errors.maxlength">Maximum length exceeded</div>
+                  </div>
+                </div>
+                <div>
+                  <label style="color:white;"> Mother Name</label><br>
+                  <input type="text" class="box" placeholder="Mother Name" formControlName="mothername">
+
+                </div>
+                <div>
+                  <label style="color:white;"> Spouse Name</label><br>
+                  <input type="text" class="box" placeholder="Spouse Name" formControlName="Spousename">
+                </div>
+                <div>
+                  <label style="margin: 4px;float: left;font-size: 20px;" for="User_Active">
+                    <!-- <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"
+                    (change)="status($event.target.checked)" name="User_Active" formControlName="User_Active">&nbsp; -->
+                    <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"
+                      (change)="status($event.target.checked)" name="User_Active" formControlName="User_Active">&nbsp;
+                    <label *ngIf="isactive" style="color: green;" value="Y" name="User_Active"
+                      for="User_Active">Active</label>
+                    <label *ngIf="isinactive" style="color: red;" for="User_Active" value="D"
+                      name="User_Active">In-Active</label>
+                  </label>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="text m-3" style="color:white;">
+          ADDITIONAL INFORMATION
+        </div>
+        <div class="m-3" style="font-size:12px;border-bottom:3px solid gray;">
+        </div>
+        <div class="row mt-3 m-3">
+          <div class="col-12 col-lg-6 col-md-6">
+            <div class="col-12">
+              <div style="color:white;">
+                <label style="color:white;"> PAN
+                  Card</label><br><input type="text" class="box" placeholder="PAN Card" formControlName="pancard"
+                  value="pancard" [ngClass]="{ 'is-invalid': submitted && f.pancard.errors }">
+                <div *ngIf="submitted && f.pancard.errors" class="invalid-feedback">
+                  <div *ngIf="f.pancard.errors.required">PAN Card Number is required</div>
+                  <div *ngIf="f.pancard.errors.pattern">PAN does not contain characters</div>
+                </div>
+
+              </div>
+              <div style="color:white;">
+                <label style="color:white;"> Passport</label><br><input type="text" class="box" placeholder="Passport"
+                  formControlName="Passport">
+              </div>
+              <div style="color:white;">
+                <label style="color: white;">Driving License</label><br><input type="text" class="box"
+                  placeholder="Driving License" formControlName="License">
+              </div>
+
+            </div>
+          </div>
+          <div class="col-12 col-lg-6 col-md-6">
+            <div class="row">
+              <div class="col-12">
+                <div>
+                  <label style="color: white;">Bank Name:</label>
+                  <span style="color:gold;" class="ms-2">{{info.UD_BANK}}</span>
+                </div>
+                <div>
+                  <label style="color: white;">Bank Account No:</label>
+                  <span style="color:gold;" class="ms-2">{{info.UD_BANK_ACCOUNT_NUMBER}}</span>
+                </div>
+                <div>
+                  <label style="color: white;">PF Account No:</label>
+                  <span style="color:gold;" class="ms-2">{{info.UD_PF_NUMBER}}</span>
+                </div>
+                <div>
+                  <label style="color: white;">UAN:</label>
+                  <span style="color:gold;" class="ms-2">{{info.UD_UAN}}</span>
+                </div>
+                <div>
+                  <label style="color:white;"> Aadhaar No</label><br>
+                  <input type="text" class="box" placeholder="Aadhaar No" formControlName="aadhaar"
+                    [ngClass]="{ 'is-invalid': submitted && f.aadhaar.errors }">
+                  <div *ngIf="submitted && f.aadhaar.errors" class="invalid-feedback">
+                    <div *ngIf="f.aadhaar.errors.required">Aadhar Number is required</div>
+                    <div *ngIf="f.aadhaar.errors.pattern">Aadhar Number must be a number</div>
+                  </div>
+
+                </div>
+                <div>
+                  <label style="color:white;"> Voter ID</label><br>
+                  <input type="text" class="box" placeholder="Voter ID" formControlName="voter">
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+        <!-- 
+        <div class="row">
+
+          <div class="col-md-6" style="color:white;">
+          </div>
+
+
+        </div> -->
+
+        <div class="row mt-3 m-3">
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="row" formGroupName="sendingAddress">
+              <div class="col-12" style="color:white;border-bottom:3px solid grey;padding:5px 2px 5px 2px;">
+                PRESENT ADDRESS
+              </div>
+              <div class="col-12 mt-3">
+                <div class="my-4"></div>
+                <div>
+                  <label style="color: white;">Address</label>
+                  <input type="text" formControlName="Address" class="sccs" placeholder="Address" autocomplete="off">
+                  <!-- <div *ngIf="submitted && f.Address.errors" class="invalid-feedback">
+                    <div *ngIf="f.Address.errors.required">Address is required</div>
+                  </div> -->
+                </div>
+                <div>
+                  <label style="color:white; ">City <br></label><input type="text" formControlName="city" class="sccs"
+                    placeholder="City" autocomplete="off">
+                  <!-- <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                    <div *ngIf="f.city.errors.required">City is required</div>
+                    <div *ngIf="myform.controls.city.errors.pattern">
+                      City must be String
+                    </div>
+                  </div> -->
+                </div>
+                <div>
+                  <label style="color:white; ">State <br></label><input type="text" formControlName="state" class="sccs"
+                    placeholder="State" autocomplete="off">
+                  <!-- <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                    <div *ngIf="f.state.errors.required">State is required</div>
+                    <div *ngIf="myform.controls.state.errors.pattern">
+                      State must be String
+                    </div>
+                  </div> -->
+                </div>
+                <div>
+                  <label style="color:white; ">Country <br></label><input type="text" formControlName="country"
+                    class="sccs" placeholder="Country" autocomplete="off">
+                  <!-- <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                    <div *ngIf="f.country.errors.required">Country is required</div>
+                    <div *ngIf="myform.controls.country.errors.pattern">
+                      Country must be String
+                    </div>
+                  </div> -->
+                </div>
+                <div>
+                  <label style="color:white; ">Zipcode <br></label><input type="text" formControlName="zip" class="sccs"
+                    placeholder="Zipcode" autocomplete="off" />
+                  <!-- <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+                    <div *ngIf="f.zip.errors.required">Zipcode is required</div>
+                    <div *ngIf="myform.controls.zip.errors.pattern">
+                      Zipcode must be String
+                    </div>
+                    <div *ngIf="f.zip.errors.maxlength">Maximum length exceeded</div>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-6">
+            <div class="row" formGroupName="billingAddress">
+              <div class="col-12">
+
+
+                <div class="col-12" style="color:white;border-bottom:3px solid grey;padding:5px 2px 5px 2px;">
+                  PERMANENT ADDRESS
+                </div>
+                <div class="col-12 col-md-6" style="color:white;">
+                  <div class="checkbox peraddrs">
+                    <label><input type="checkbox" [formControl]="box" value=""> Same as Present Address</label>
+                  </div>
+                </div>
+                <div>
+                  <label style="color:white;">Address <br></label><input type="text" class="sccs"
+                    formControlName="Address" placeholder="Address" autocomplete="off">
+                </div>
+                <div>
+                  <label style="color:white;"> City<br></label><input type="text" class="sccs" formControlName="city"
+                    placeholder="City" autocomplete="off">
+                </div>
+                <div>
+                  <label style="color:white;">State <br></label><input type="text" class="sccs" formControlName="state"
+                    placeholder="State" autocomplete="off">
+                </div>
+                <div>
+                  <label style="color:white;">Country <br></label><input type="text" class="sccs"
+                    formControlName="country" placeholder="Country" autocomplete="off">
+                </div>
+                <div>
+                  <label style="color:white;">Zipcode <br></label><input type="text" class="sccs" formControlName="zip"
+                    placeholder="Zipcode" autocomplete="off">
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+        </div>
+        <div class="mb-3 m-3">
+          <textarea class="form-control " id="val" rows="3" placeholder="Note"></textarea>
+        </div>
+
+
+        <div class="cen">
+          <button type="submit" class="btn btn-info">Save</button>&nbsp;
+          <button type="button" class="btn btn-warning ms-2" (click)="Cancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="position: revert; ">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+        <div class="modal-body">
+          <div>
+            <h1 style="text-align: center;">Password Change</h1>
+          </div>
+          <div>
+            <label for="recipient-name" class="col-form-label">Password</label>
+            <input type="text" class="form-control" placeholder="*Password">
+          </div>
+          <div>
+            <label for="recipient-name" class="col-form-label">Re-Enter Password</label>
+            <input type="text" class="form-control" placeholder="*Password">
+          </div>
+          <div>
+            <button type="submit" class="btn btn-info">Save</button>&nbsp;
+            <button type="button" (click)="Cancel()" class="btn btn-warning">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
