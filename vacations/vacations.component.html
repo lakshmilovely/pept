@@ -1,0 +1,305 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<app-header></app-header>
+<div class="container ">
+  <div class="row row-db" *ngIf="showGrid">
+    <div class="col-md-12">
+      <div class="head-bg">
+        <div class="head-bg-left">
+          <span style=" float: left;">VACATION REQUEST</span>
+          <div style=" float: right;">
+            <span class="add-panel" (click)="AddPanel()"><i class="fas fa-plus-circle"></i> add</span>
+            <span class="sm-verticle-bar"></span>
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+            <span class="sm-verticle-bar"></span>
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-inverse" *ngIf="showGrid">
+    <div class="head-bg">
+      <div class="navbar-header ">
+        <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float: right;">
+          <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+        </a>
+        <span class="navbar-brand" href="#">VACATION REQUEST</span>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="pt-3"><span (click)="AddPanel()"><i class="fas fa-plus-circle"></i> add</span></li>
+          <li class="pt-3"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+          <li class="pt-3 pb-2"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">project
+              dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <div class="main-container" *ngIf="showGrid">
+    <div class="container pt64 ">
+      <div class="row ">
+        <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 mt-5">
+          <div class="table-scroll">
+
+            <table class="flex-table flex-table-aligned table table-striped table-hover">
+              <thead>
+                <tr class="thead-row">
+                  <th style="width: 12%;" class="text-center">Request Type</th>
+                  <th style="width: 25%;" class="text-center">Reason</th>
+                  <th style="width: 10%;" class="text-center">Start Date</th>
+                  <th style="width: 10%;" class="text-center">End Date</th>
+                  <th style="width: 18%;" class="text-center">Request To</th>
+                  <th style="width: 15%;" class="text-center">Request Status</th>
+                  <th style="width: 5%;" class="text-center">Edit</th>
+                  <th style="width: 5%;" class="text-center">Delete</th>
+                </tr>
+              </thead>
+              <tbody class="scroll">
+                <tr *ngFor="let x of info;">
+                  <td class="tdspname text-center" style="width: 12%;">{{x.VacationType}}</td>
+                  <td class="tdspname text-center" style="width: 25%;">{{x.V_REASON}}</td>
+                  <td class="tdspname text-center" style="width: 10%;">{{x.V_START_DATE | date:'M/dd/yyyy'}}</td>
+                  <td class="tdspname text-center" style="width: 10%;">{{x.V_END_DATE | date:'M/dd/yyyy'}}</td>
+                  <td style="width: 18%;" class="text-center">{{designationId.USER_NAME}}</td>
+                  <td class="tdspname text-center" style="width: 15%;"
+                    [ngClass]="{'Approved':x.V_STATUS === 'A', 'Pending':x.V_STATUS === 'P', 'Rejected':x.V_STATUS === 'R'}">
+                    {{x.V_STATUS=='A'?'Approved': (x.V_STATUS=='P'?'Pending':'Rejected')}}
+                    <!-- {{x.V_STATUS=='A'?'Approved':'Pending'}} -->
+                  </td>
+                  <td style="width: 5%;" class="text-center">
+                    <div class="cursor">
+                      <img src="./../../../assets/Images/edt_icon.png" class=" actions" (click)="edit(x)">
+                    </div>
+                  </td>
+                  <td style="width: 5%;" class="text-center">
+                    <div class="cursor">
+                      <img src="./../../../assets/Images/del_gry.png" class=" actions" (click)="del(x)">
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD FORM -->
+
+  <nav class="navbar navbar-inverse" *ngIf="showAddPanel">
+    <div class="head-bg">
+      <div class="navbar-header ">
+        <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float: right;">
+          <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+        </a>
+        <span class="navbar-brand">VACATION REQUEST (Add)</span>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="pt-3"><span (click)="viewall()">view all</span></li>
+          <li class="pt-3"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+          <li class="pt-3 pb-2"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">project
+              dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row row-db" *ngIf="showAddPanel">
+    <div class="col-md-12">
+      <div class="head-bg">
+        <div class="head-bg-left">
+          <span style=" float: left;">VACATION REQUEST (Add)</span>
+          <div style=" float: right;">
+            <span (click)="viewall()" class="add-panel"> view all</span>
+            <span class="sm-verticle-bar"></span>
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+            <span class="sm-verticle-bar"></span>
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid" style="display: block;" *ngIf="showAddPanel">
+    <form [formGroup]="gustform">
+      <div class="col-lg-8 ms-3 pt-3 form-content">
+        <div class="row">
+          <div class="col-lg-6">
+            Request To : &nbsp;<span style="color: #ffc107;">{{designationId.USER_NAME}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">Request Type</label>
+              <select class="form-select" formControlName="type" (change)="onChange($event)">
+                <option [ngValue]="null" selected disabled>--- Select Request Type ---</option>
+                <option *ngFor="let vacation of vacationsdata" [value]="vacation.VT_ID">{{vacation.VT_NAME}}</option>
+              </select>
+              <small class="redclr" *ngIf="submitted && gustform.controls.type.hasError('required')"> Request type is
+                required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">Start Date</label>
+              <input type="date" class="form-control" formControlName="startDate" name="date1" id="date1" [min]=Today>
+              <small class="redclr" *ngIf="submitted && gustform.controls.startDate.hasError('required')"> Start date is
+                required</small>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">End Date</label>
+              <input type="date" class="form-control" formControlName="enddate" name="date2" id="date2" [min]=Today>
+              <!-- <div *ngIf="submitted && f.enddate.errors" class="invalid-feedback">
+                <div *ngIf="f.enddate.errors.required">end date is required
+
+                </div>
+              </div> -->
+              <small class="redclr" *ngIf="submitted && gustform.controls.enddate.hasError('required')"> End date is
+                required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="LoacationDescription" class="mb-2">Reason </label>
+              <textarea class="form-control textarea" style="min-height: 100px;" formControlName="text"
+                id="LoacationDescription" rows="3" placeholder="Reason"></textarea>
+              <small class="redclr" *ngIf="submitted && gustform.controls.text.hasError('required')"> Reason is
+                required</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-lg-8">
+            <button type="submit" class="btn btn-info " (click)="adddata()">Send Request</button>
+            <button class="btn btn-warning ms-2" (click)="Cancel()">Cancel Request</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- EDIT FORM -->
+
+  <nav class="navbar navbar-inverse" *ngIf="showEditPanel">
+    <div class="head-bg">
+      <div class="navbar-header ">
+        <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float: right;">
+          <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+        </a>
+        <span class="navbar-brand">VACATION REQUEST (Edit)</span>
+
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="pt-3"><span (click)="viewall()">view all</span></li>
+          <li class="pt-3"><a href="dashboard" style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+          <li class="pt-3 pb-2"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">project
+              dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row row-db" *ngIf="showEditPanel">
+    <div class="col-md-12">
+      <div class="head-bg">
+        <div class="head-bg-left">
+          <span style=" float: left;">VACATION REQUEST (Edit)</span>
+
+          <div style=" float: right;">
+            <span (click)="viewall()" class="add-panel"> view all</span>
+            <span class="sm-verticle-bar"></span>
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+            <span class="sm-verticle-bar"></span>
+            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" style="display: block;" *ngIf="showEditPanel">
+    <form [formGroup]="myform">
+      <div class="col-lg-8 ms-3 pt-3 form-content">
+        <div class="row">
+          <div class="col-lg-6">
+            Request To : &nbsp;<span style="color: #ffc107;">{{designationId.USER_NAME}}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">Request Type</label>
+              <select class="form-select" formControlName="types" (change)="onChange($event)">
+                <option [ngValue]="null" selected disabled>--- Select Request Type ---</option>
+                <option *ngFor="let vacation of vacationsdata" [value]="vacation.VT_ID">{{vacation.VT_NAME}}</option>
+
+              </select>
+              <!-- <input list="browsers"placeholder="- - -Select- - -" name="browser" id="browser" style="width: 395px;;margin-bottom: 28px;"  class=" form-control"  class=" dropdown-toggle" formControlName="types" data-toggle="dropdown" >
+               <datalist id="browsers">
+                    <option *ngFor="let vacationof vacationsdata"[value]="vacation.VT_ID">{{vacation.VT_NAME}}</option>
+               </datalist> -->
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">Start Date</label>
+              <input name="date1" class="form-control" formControlName="startDates">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="exampleInputEmail1" class="mb-2 mt-3">End Date</label>
+              <input name="date2" class="form-control" formControlName="enddates">
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-lg-12">
+            <div class="form-group">
+              <label for="LoacationDescription" class="mb-2">Reason </label>
+              <textarea class="form-control textarea" style="min-height: 100px;" formControlName="texts"
+                id="LoacationDescription" rows="3" placeholder="Reason"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-lg-8">
+            <button type="submit" class="btn btn-info " (click)="update()">Send Request</button>
+            <button class="btn btn-warning ms-2" (click)="Cancel()">Cancel Request</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+</div>

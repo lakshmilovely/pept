@@ -1,0 +1,255 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0aa0c2" type="ball-scale-multiple">
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+<app-header></app-header>
+<div>
+  <div class="container ">
+    <div class="row row-db">
+      <div class="col-md-12">
+        <div class="head-bg">
+          <div class="head-bg-left">
+            <span style=" float: left;">VACATION APPROVAL</span>
+            <div style=" float: right;">
+              <!-- <span class="add-panel"><i class="fas fa-plus-circle"></i> add</span>
+              <span class="sm-verticle-bar"></span> -->
+              <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+              <span class="sm-verticle-bar"></span>
+              <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+              <span class="sm-verticle-bar"></span>
+              <span class="glyphicon glyphicon-search"><i class="fas fa-search"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-container" *ngIf="showGridDetails">
+      <div class="col-md-12 pt-3 buttons">
+        <div class="col-xs-12 text-center">
+          <button id="newreqref" type="button" id="btn" class="btn  ms-1 countbgcolor"
+            [ngClass]="{'countbgcolor-active' : reference == 'P'}" (click)="EventClick('P')">Pending: <span
+              class="badge"><span id="newreqcount" class="count">{{PendingCount}}</span></span></button>
+          <button id="openref" type="button" id="btn" class="btn  ms-1 countbgcolor"
+            [ngClass]="{'countbgcolor-active' : reference == 'A'}" (click)="EventClick('A')">Approved:
+            <span class="badge"><span id="opencount" class="count">{{ApprovedCount}}</span></span></button>
+          <button id="needref" type="button" id="btn" class="btn  ms-1 countbgcolor"
+            [ngClass]="{'countbgcolor-active' : reference == 'R'}" (click)="EventClick('R')">Rejected:
+            <span class="badge"><span id="needcount" class="count">{{RejectCount}}</span></span></button>
+        </div>
+      </div>
+
+      <div class="col-md-12 ms-4 pt-3 dropdowntype" style="display: none;">
+        <span id="qabugcountname" style="float: left; margin-top: 15px">View: </span>
+        <div id="qabugcountid" style="float: left; margin-left: 5px;">
+          <select id="bugscount" style="margin-top: 10px" class="form-control" tabindex="1"
+            (change)="onChange($event.target.value)">
+            <!-- <option value="0">All</option> -->
+            <option value="P">PENDING({{PendingCount}})</option>
+            <option value="A">APPROVED ({{ApprovedCount}})</option>
+            <option value="R">REJECTED ({{RejectCount}})</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="container  pt64">
+        <div class="row" *ngIf="showGrid">
+          <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 mt-5">
+            <div class="table-scroll ">
+              <table class="flex-table flex-table-aligned table table-striped table-hover">
+                <thead>
+                  <tr class="thead-row">
+                    <th style="width: 30%;" class="text-center">Employee Name</th>
+                    <th style="width: 15%;" class="text-center">Request Type</th>
+                    <th style="width: 15%;" class="text-center">Start Date</th>
+                    <th style="width: 10%;" class="text-center"> Status</th>
+                    <th style="width: 10%;" class="text-center"><span *ngIf="reference=='P'">Approve</span><span
+                        *ngIf="reference!='P'">Edit</span></th>
+                    <th style="width: 10%;" class="text-center"><span *ngIf="reference=='P'">Reject</span> <span
+                        *ngIf="reference!='P'">
+                        Delete</span></th>
+                    <th style="width: 10%;" class="text-center"> Reason</th>
+                    <!-- <th><span *ngIf="reference=='P'">Cancel</span></th> -->
+                  </tr>
+                </thead>
+                <tbody class="scroll">
+                  <tr *ngFor="let va of userdata">
+                    <td style="width: 30%;" class="text-center">{{va.NAME}}</td>
+                    <td style="width: 15%;" class="text-center">{{va.VacationType}}</td>
+                    <td style="width: 15%;" class="text-center">{{va.V_START_DATE | date:'MM/dd/yyyy'}} </td>
+                    <td style="width: 10%;" class="text-center">
+                      <span [ngClass]="{
+                            rr:va.V_STATUS == 'A'  ,
+                            gg:va.V_STATUS == 'P'  ,
+                            bb:va.V_STATUS == 'R' ,
+                            mm:va.V_STATUS == 'C' 
+                            }">{{va.V_STATUS == 'A' ? 'Approved' : '' }} {{va.V_STATUS == 'P' ? 'Pending' : '' }}
+                        {{va.V_STATUS == 'R' ? 'Rejected' : '' }} </span>
+                    </td>
+                    <td style="width: 10%;" class="text-center">
+                      <span *ngIf="reference!='P'">
+                        <!-- <button style="color:rgba(10,160,194,1);font-size: 18px;" class="btn" data-bs-toggle="modal" data-bs-target="#myModal" (click)="edit(va)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button> -->
+                        <a><img title="Show" class="show-panel actions" data-bs-toggle="modal"
+                            data-bs-target="#myModal1" (click)="edit(va)" src="../../../assets/Images/edt_icon.png"></a>
+                      </span>
+                      <span *ngIf="reference=='P'"> <a style="color:rgb(106, 119, 121);font-size: 16px;"
+                          (click)="StatusChange(va,'A')"><i class="fas fa-thumbs-up cursor"></i></a></span>
+                    </td>
+                    <td style="width: 10%;" class="text-center">
+                      <span *ngIf="reference!='P'">
+                        <!-- <button style="color:rgba(10,160,194,1);font-size: 18px;" class="btn " (click)="del(va)"><i class="fa fa-trash" aria-hidden="true"></i></button> -->
+                        <a><img title="Delete" class="actions" style="height: 18px;" (click)="del(va)"
+                            src="../../../assets/Images/del_gry.png"></a>
+                      </span>
+                      <span *ngIf="reference=='P'"> <a style="color:rgb(106, 119, 121);font-size: 16px;"
+                          (click)="StatusChange(va,'R')"><i class="fa fa-thumbs-down cursor" aria-hidden="true"></i></a>
+                      </span>
+                    </td>
+                    <td style="width: 10%;" class="text-center">
+                      <!-- <button style="color:rgba(10,160,194,1);font-size: 18px;" class="btn"data-bs-toggle="modal" data-bs-target="#popup" (click)="modal(va)"><i class="fa fa-eye" aria-hidden="true"></i></button>  -->
+                      <a><img [title]="va.V_REASON" class="show-panel actions"
+                          src="../../../assets/Images/view_icon.png"></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4" *ngIf="showError">
+          <div class="col-md-12 ">
+            <div class="form-group" style="text-align: center">
+              <!-- <label for="lblstatusdisplay" class="alert alert-danger" >{{result}}</label> -->
+              <label for="lblreccount" class="control-label"></label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="container mt-4 pt64">
+        <div class="modal fade bd-example-modal-sm" id="popup" tabindex="-1" role="dialog"
+          aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="pop-header table">
+                  <div class="table-cell ms-2 pt-1">
+                    <img src="assets\Images\spyhre-logo.png" class="img-responsive" alt="spyhre"
+                      style="height: 68px !important;">
+
+                  </div>
+
+                </div>
+
+                <div style="cursor: pointer; margin-top: -30px;">
+                  <a class="close-link" data-bs-dismiss="modal" aria-label="Close"
+                    style="margin-right: 16px; font-size: 22px; ">x</a>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <h4 style="text-align: center; color: blue;font-weight: 300;">Reason</h4>
+                </div>
+                <div>
+                  <span style="color: black; text-align: center; font-weight: 200;">{{ress}}</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+        <!--modal-->
+        <div class="modal fade" id="myModal1" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" style="position: revert; ">
+            <div class="modal-content">
+              <div class="modal-header"
+                style="background: linear-gradient(to right, rgb(0, 41, 88) 0%, rgba(255,175,75,0) 100%) !important;height: 65px;">
+                <div class="pop-header table">
+
+                  <div class="pop-header table">
+                    <div class="tabel-cell mt-3">
+                      <img src="assets\Images\spyhre-logoemail.png" class="img-responsive" alt="spyhre">
+                    </div>
+                  </div>
+                </div>
+                <div style="cursor: pointer;">
+                  <a class="close-link" data-bs-dismiss="modal" aria-label="Close"
+                    style="margin-right: 16px;font-size: 15px;">x</a>
+                </div>
+              </div>
+              <div class="modal-body">
+                <form [formGroup]="myform">
+                  <div>
+                    <h5 style="text-align: center; color:  rgb(10, 71, 141);">Vacation Approval</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 col-sm-12">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="mt-2">
+                            <label style="color:rgba(10,160,194,1);">Request By: </label>
+                            <span style="color: black;" class="ms-1">&nbsp;{{val}}</span>
+                          </div>
+                          <div class="mt-2">
+                            <label style="color:rgba(10,160,194,1);">Request To: </label>
+                            <span style="color: black;" class="ms-1">&nbsp;{{designationId.USER_NAME}}</span>
+
+                          </div>
+
+                          <div class="mt-2">
+                            <label style="color:rgba(10,160,194,1);">Request For: </label>
+                            <span style="color: black;" class="ms-1">&nbsp; {{val1}}</span>
+                            <label style="padding-left: 70px;"> From </label>&nbsp;
+                            <input type="text" placeholder="form" formControlName="from">&nbsp;
+
+                            <label>
+                              To
+                            </label>&nbsp;
+                            <input type="text" formControlName="to">
+
+
+                          </div>
+                          <div>
+                            <label style="color:rgba(10,160,194,1);">Reason: </label>
+                            <span style="color: black;" class="ms-1">&nbsp;{{val2}}</span>
+
+                          </div>
+                          <div class="mt-2">
+                            <div class=" form-check-inline">
+                              <label class="form-check-label" *ngFor="let g of genderlist">
+                                <input class="form-check-input" type="radio" [value]="g.value" name="radio"
+                                  formControlName="radio" [checked]="g.selected"> {{g.text}}&nbsp;&nbsp;
+                              </label>
+                            </div>
+                          </div>
+
+                          <div class="mt-2">
+                            <label style="color:rgba(10,160,194,1);">Comments</label>
+                          </div>
+                          <div>
+                            <textarea rows="4" cols="50" placeholder="New Comments" formControlName="text"></textarea>
+                          </div>
+                          <div class="pt-3">
+                            <button type="button" class="btn btn-primary popbtn" (click)="update()"
+                              data-bs-dismiss="modal">Save</button>&nbsp;
+                            <button type="button" class="btn btn-primary popbtn" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>

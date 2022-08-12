@@ -1,0 +1,164 @@
+<app-header></app-header>
+<div class="card123">
+    <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+        <p style="font-size: 20px; color: white">Loading...</p>
+    </ngx-spinner>
+    <div class="container ">
+
+        <div class="row row-db" *ngIf="showGrid">
+            <div class="col-md-12">
+                <div class="head-bg">
+                    <div class="head-bg-left">
+                        <span style=" float: left;">PROJECT URL TYPES</span>
+                        <div style=" float: right;">
+                            <span (click)="addinsert()" class="add-panel"><i class="fas fa-plus-circle"></i> add</span>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-inverse" *ngIf="showGrid">
+            <div class="head-bg">
+                <div class="navbar-header ">
+                    <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"
+                        style="float: right;">
+                        <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+                    </a>
+                    <span class="navbar-brand" href="#">PROJECT URL TYPES</span>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="pt-3"><span (click)="addinsert()"><i class="fas fa-plus-circle"></i> add</span></li>
+                        <li class="pt-3"><a href="userdashboard"
+                                style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+                        <li class="pt-3 pb-2"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">project
+                                dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-inverse" *ngIf="showAddPanel" >
+            <div class="head-bg">
+              <div class="navbar-header ">
+                <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" style="float: right;">
+                    <i class="fas fa-bars pt-1" style="color: #66bf8a; font-size: 20px;"></i>
+                </a>
+                <span class="navbar-brand" *ngIf="save1">URL TYPES (Add)</span>
+                <span class="navbar-brand" *ngIf="save2">URL TYPES (Edit)</span>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                  <li class="pt-3"><span (click)="viewall()">view all</span></li>
+                  <li class="pt-3"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">dashboard</a></li>
+                  <li class="pt-3 pb-2"><a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+        <div class="row row-db" *ngIf="showAddPanel">
+            <div class="col-md-12">
+                <div class="head-bg">
+                    <div class="head-bg-left">
+                        <span style=" float: left;" *ngIf="save1">PROJECT URL TYPE (Add)</span>
+                        <span style=" float: left;" *ngIf="save2">PROJECT URL TYPE (Edit)</span>
+                        <div style=" float: right;">
+                            <span (click)="viewall()" class="add-panel"> view all</span>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;"> dashboard</a>
+                            <span class="sm-verticle-bar"></span>
+                            <a href="userdashboard" style="text-decoration: none; color: #ffffff;">project dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container" *ngIf="showGrid">
+            <div class="container pt64 ">
+                <div class="row ">
+                    <div class="col-lg-12 col-xs-12 col-sm-12 col-md-12 mt-5">
+                        <div class="table-scroll">
+                            <table class="flex-table flex-table-aligned table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 35%;">Url Types</th>
+                                        <th style="width: 25%;">Status</th>
+                                        <th style="width: 20%;">Date</th>
+                                        <th style="width: 20%; text-align: center;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="scroll">
+                                    <tr *ngFor="let data of projectdata" >
+                                        <td class="tdspname" style="width: 35%;">{{data.PUT_NAME}}</td>
+                                        <td [ngClass]="data.PUT_ACTIVE=='Y'?'ACTIVE':'INACTIVE'" style="width: 25%;">
+                                              {{data.PUT_ACTIVE=='Y'?'Active':'Inactive'}}</td>
+                                        <td class="tdspname" style="width: 20%;">{{data.PUT_TS |date: 'M/dd/yyyy'}}</td>
+                                        <td class="tdspname" style="width: 20%; text-align: center;">
+                                            <a><img title="Edit" class="edit-panel actions mx-2" (click)="EditPanel(data)" src="../../../assets/Images/edt_icon.png"></a>
+                                            <!-- <a><img title="Delete" class="actions " (click)="delete(data)" src="../../../assets/Images/del_gry.png"></a>  -->
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- form -->
+        <div class="container-fluid" *ngIf="showAddPanel" style="display: block;">
+            <form [formGroup]="gustform">
+                <div class="col-lg-12 form-content">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1" class="mb-2">Project Url Type</label>
+                                <input type="text" formControlName="urltypes" class="form-control"
+                                    placeholder="Project Url Type"
+                                    [ngClass]="{ 'is-invalid': submitted && f.urltypes.errors }">
+                                <div *ngIf="submitted && f.urltypes.errors" class="invalid-feedback">
+                                    <div *ngIf="f.urltypes.errors.required">Project url type is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-3" >
+
+                        <div class="col-6" *ngIf="hideall">
+                  
+                            <label style="margin: 4px;float: left;font-size: 20px;" for="PUT_ACTIVE"  >
+                                        
+                            <input style="cursor: pointer;" [checked]="isstatus" type="checkbox"   (change)="status($event.target.checked)"   name="PUT_ACTIVE" formControlName="PUT_ACTIVE">&nbsp;
+                           
+                            <label *ngIf="isactive"   style="color: green;cursor: pointer;" value="Y"  name="PUT_ACTIVE" for="PUT_ACTIVE">Active</label>
+                  
+                            <label *ngIf="isinactive" style="color: red;cursor: pointer;"  for="PUT_ACTIVE"  value="N" name="PUT_ACTIVE">In-Active</label>
+                            
+                            </label>
+                    
+                        </div>
+                  
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-4">
+                            <button type="submit" style="background-color: skyblue;color: #fff;" *ngIf="save1"
+                                class="btn" (click)="insert()">Save</button>
+                            <button type="submit" style="background-color: skyblue;color: #fff;" *ngIf="save2"
+                                class="btn" (click)="saveedit()">Save</button>
+                            <button class="btn btn-warning ms-2" (click)="Cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
